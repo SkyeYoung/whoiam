@@ -1,0 +1,2 @@
+# yaml-language-server: $schema=apps/blog/node_modules/.local/blog.schema.json
+site: https://blog.syis.me

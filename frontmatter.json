@@ -1,0 +1,91 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.publicFolder": "public",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "Blog",
+      "path": "[[workspace]]/content/blog"
+    }
+  ],
+  "frontMatter.content.autoUpdateDate": true,
+  "frontMatter.taxonomy.dateField": "created_at",
+  "frontMatter.taxonomy.modifiedField": "updated_at",
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "blog",
+      "pageBundle": false,
+      "filePrefix": null,
+      "clearEmpty": true,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string",
+          "single": true,
+          "required": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string",
+          "required": true,
+          "default": "placeholder"
+        },
+        {
+          "title": "Slug",
+          "name": "slug",
+          "type": "string",
+          "required": true
+        },
+        {
+          "title": "Created At",
+          "name": "created_at",
+          "type": "datetime",
+          "default": "{{now}}",
+          "required": true,
+          "isPublishDate": true
+        },
+        {
+          "title": "Updated At",
+          "name": "updated_at",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isModifiedDate": true,
+          "required": true
+        },
+        {
+          "title": "Draft",
+          "name": "draft",
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "tags",
+          "default": []
+        },
+        {
+          "title": "Categories",
+          "name": "categories",
+          "type": "categories",
+          "default": []
+        },
+        {
+          "title": "Cover Image",
+          "name": "cover",
+          "type": "image",
+          "isPreviewImage": true
+        },
+        {
+          "title": "fmContentType",
+          "name": "fmContentType",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "frontMatter.framework.startCommand": "pnpm run dev"
+}

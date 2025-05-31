@@ -1,14 +1,12 @@
 {
-  "name": "blog",
-  "type": "module",
-  "version": "0.0.1",
+  "name": "yyyoung-collection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "astro": "^5.8.1"
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
