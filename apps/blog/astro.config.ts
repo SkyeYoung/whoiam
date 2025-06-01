@@ -7,6 +7,7 @@ import { siteConfig } from './src/configs/site';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import unpluginInfo from 'unplugin-info/astro';
+import unpluginIcons from 'unplugin-icons/vite';
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +15,13 @@ export default defineConfig({
   integrations: [react(), sitemap(), mdx(), unpluginInfo()],
 
   vite: {
-    plugins: [tailwindcss()] as any[],
+    plugins: [
+      tailwindcss(),
+      unpluginIcons({
+        autoInstall: true,
+        compiler: 'jsx',
+        jsx: 'react',
+      }),
+    ] as any[],
   },
 });

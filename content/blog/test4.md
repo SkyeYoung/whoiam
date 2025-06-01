@@ -6,7 +6,8 @@ draft: false
 tags: []
 categories: []
 created_at: 2025-05-31T16:54:28.232Z
-updated_at: 2025-05-31T16:54:28.232Z
+updated_at: 2025-06-01T10:52:23.694Z
+fmContentType: blog
 ---
 
 test
