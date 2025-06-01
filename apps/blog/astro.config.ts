@@ -13,7 +13,13 @@ import unpluginIcons from 'unplugin-icons/vite';
 export default defineConfig({
   site: siteConfig.site,
   integrations: [react(), sitemap(), mdx(), unpluginInfo()],
-
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport',
+  },
+  experimental: {
+    clientPrerender: true,
+  },
   vite: {
     plugins: [
       tailwindcss(),

@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { sortByCreatedAt } from '../../utils/collection';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ItemDate, ItemTags, ListItem } from '@/components/posts/List';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -21,9 +22,27 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title}>
-  <article>
-    <h1>{post.data.title}</h1>
-    <Content />
+  <article class="mt-[80px] px-2 min-w-xl">
+    <section class="mb-10">
+      <ItemDate post={post.data} />
+      <h1
+        class="font-bold text-4xl"
+        transition:name={`${post.data.slug}-title`}
+      >
+        {post.data.title}
+      </h1>
+      <div
+        class="flex gap-2 mt-4 justify-end border-t-1 border-zinc-800/5 py-2"
+      >
+        <ItemTags post={post.data} />
+      </div>
+    </section>
+
+    <div
+      class="prose prose-h1:font-bold prose-h1:text-xl prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl prose-headings:underline"
+    >
+      <Content />
+    </div>
   </article>
 
   <nav>

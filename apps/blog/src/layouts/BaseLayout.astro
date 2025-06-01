@@ -3,6 +3,7 @@ import { Footer } from '@/components/layouts/Footer';
 import { Header } from '@/components/layouts/Header';
 import { siteConfig } from '@/configs/site';
 import '@/styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title?: string;
@@ -27,6 +28,7 @@ const title = pageTitle
       href={new URL('rss.xml', siteConfig.site)}
     />
     <title>{title}</title>
+    <ClientRouter />
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
