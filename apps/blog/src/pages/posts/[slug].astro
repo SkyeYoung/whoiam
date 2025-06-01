@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import { sortByCreatedAt } from '../../utils/collection';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -19,16 +20,20 @@ const { post, prevPost, nextPost } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<h1>{post.data.title}</h1>
-<Content />
+<BaseLayout title={post.data.title}>
+  <article>
+    <h1>{post.data.title}</h1>
+    <Content />
+  </article>
 
-<nav>
-  <ul>
-    <li>
-      {prevPost && <a href={`/posts/${prevPost.data.slug}`}>Previous</a>}
-    </li>
-    <li>
-      {nextPost && <a href={`/posts/${nextPost.data.slug}`}>Next</a>}
-    </li>
-  </ul>
-</nav>
+  <nav>
+    <ul>
+      <li>
+        {prevPost && <a href={`/posts/${prevPost.data.slug}`}>Previous</a>}
+      </li>
+      <li>
+        {nextPost && <a href={`/posts/${nextPost.data.slug}`}>Next</a>}
+      </li>
+    </ul>
+  </nav>
+</BaseLayout>

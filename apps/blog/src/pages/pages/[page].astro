@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { sortByCreatedAt } from '../../utils/collection';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection('blog');
@@ -11,38 +12,40 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 ---
 
-<ul>
-  {
-    page.data.map((post) => (
-      <li>
-        <a href={`/posts/${post.data.slug}`}>{post.data.title}</a>
-      </li>
-    ))
-  }
-</ul>
-
-<nav role="navigation" aria-label="Pagination">
+<BaseLayout>
   <ul>
-    <li>
-      <a
-        href={page.url.prev}
-        class="previous-page"
-        aria-label="Go to previous page">Prev</a
-      >
-    </li>
-    <li>
-      <a
-        class="number"
-        href={page.url.current}
-        aria-label={`Go to page ${page.currentPage}`}
-      >
-        {page.currentPage}
-      </a>
-    </li>
-    <li>
-      <a href={page.url.next} class="next-page" aria-label="Go to next page"
-        >Next</a
-      >
-    </li>
+    {
+      page.data.map((post) => (
+        <li>
+          <a href={`/posts/${post.data.slug}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
   </ul>
-</nav>
+
+  <nav role="navigation" aria-label="Pagination">
+    <ul>
+      <li>
+        <a
+          href={page.url.prev}
+          class="previous-page"
+          aria-label="Go to previous page">Prev</a
+        >
+      </li>
+      <li>
+        <a
+          class="number"
+          href={page.url.current}
+          aria-label={`Go to page ${page.currentPage}`}
+        >
+          {page.currentPage}
+        </a>
+      </li>
+      <li>
+        <a href={page.url.next} class="next-page" aria-label="Go to next page"
+          >Next</a
+        >
+      </li>
+    </ul>
+  </nav>
+</BaseLayout>
