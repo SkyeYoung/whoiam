@@ -1,0 +1,25 @@
+---
+import { render } from 'astro:content';
+import { ItemDate, ItemTags } from './List';
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<article class="mt-[80px] px-2 min-w-3xl">
+  <section class="mb-10">
+    <ItemDate post={post.data} />
+    <h1 class="font-bold text-4xl" transition:name={`${post.data.slug}-title`}>
+      {post.data.title}
+    </h1>
+    <div class="flex gap-2 mt-4 justify-end border-t-1 border-zinc-800/5 py-2">
+      <ItemTags post={post.data} />
+    </div>
+  </section>
+
+  <div
+    class="prose prose-h1:font-bold prose-h1:text-xl prose-a:no-underline prose-a:hover:text-blue-600 prose-p:text-justify prose-img:rounded-xl"
+  >
+    <Content />
+  </div>
+</article>

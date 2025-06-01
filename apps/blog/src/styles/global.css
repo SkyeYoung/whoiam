@@ -12,3 +12,14 @@
     @apply text-lg;
   }
 }
+
+h1:hover,
+h2:hover,
+h3:hover,
+h4:hover,
+h5:hover,
+h6:hover {
+  span.icon-link::after {
+    @apply content-["#"] text-base transition-all;
+  }
+}

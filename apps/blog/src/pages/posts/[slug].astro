@@ -4,6 +4,8 @@ import { sortByCreatedAt } from '../../utils/collection';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ItemDate, ItemTags } from '@/components/posts/List';
 import Comments from '@/components/posts/Comments.astro';
+import Article from '@/components/posts/Article.astro';
+import { Toc } from '@/components/posts/Toc';
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -20,34 +22,19 @@ export async function getStaticPaths() {
 }
 // 2. For your template, you can get the entry directly from the prop
 const { post, prevPost, nextPost } = Astro.props;
-const { Content } = await render(post);
+const { headings } = await render(post);
 ---
 
 <BaseLayout title={post.data.title}>
-  <article class="mt-[80px] px-2 min-w-3xl">
-    <section class="mb-10">
-      <ItemDate post={post.data} />
-      <h1
-        class="font-bold text-4xl"
-        transition:name={`${post.data.slug}-title`}
-      >
-        {post.data.title}
-      </h1>
-      <div
-        class="flex gap-2 mt-4 justify-end border-t-1 border-zinc-800/5 py-2"
-      >
-        <ItemTags post={post.data} />
-      </div>
-    </section>
-
-    <div
-      class="prose prose-h1:font-bold prose-h1:text-xl prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl"
-    >
-      <Content />
+  <div class="flex flex-row relative">
+    <div>
+      <Article post={post} />
+      <div class="my-10 border-t-1 border-zinc-800/5"></div>
+      <Comments />
     </div>
-  </article>
 
-  <div class="my-10 border-t-1 border-zinc-800/5"></div>
-
-  <Comments />
+    <aside class="ml-20 sticky h-0 top-[25%]">
+      <Toc headings={headings} />
+    </aside>
+  </div>
 </BaseLayout>
