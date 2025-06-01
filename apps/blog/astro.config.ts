@@ -6,13 +6,14 @@ import { siteConfig } from './src/configs/site';
 
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
+import unpluginInfo from 'unplugin-info/astro';
 
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.site,
-  integrations: [react(), sitemap(), mdx()],
+  integrations: [react(), sitemap(), mdx(), unpluginInfo()],
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss()] as any[],
   },
 });
