@@ -1,2 +1,4 @@
 # yaml-language-server: $schema=apps/blog/node_modules/.local/blog.schema.json
 site: https://blog.syis.me
+title: Young's Blog
+description: "Young's Blog"

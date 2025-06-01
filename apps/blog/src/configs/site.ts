@@ -4,6 +4,8 @@ import path from 'path';
 
 const schema = z.object({
   site: z.string(),
+  title: z.string(),
+  description: z.string().default(''),
 });
 
 export const siteConfig = await loadConfig({
