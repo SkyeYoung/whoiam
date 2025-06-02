@@ -12,6 +12,8 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkGemoji from 'remark-gemoji';
 import { remarkAlert } from 'remark-github-blockquote-alert';
+import { FileSystemIconLoader } from 'unplugin-icons/loaders';
+
 import type { AstroUserConfig } from 'astro';
 
 const mdOpts = {
@@ -21,7 +23,7 @@ const mdOpts = {
     [
       rehypeAutolinkHeadings,
       {
-        behavior: 'prepend',
+        behavior: 'append',
       },
     ],
   ],
@@ -48,9 +50,14 @@ export default defineConfig({
     plugins: [
       tailwindcss(),
       unpluginIcons({
-        autoInstall: true,
         compiler: 'jsx',
         jsx: 'react',
+        autoInstall: true,
+        customCollections: {
+          my: FileSystemIconLoader('./src/assets/icons', (svg) =>
+            svg.replace(/^<svg /, '<svg fill="currentColor" ')
+          ),
+        },
       }),
     ] as any[],
   },
