@@ -26,14 +26,14 @@ const { headings } = await render(post);
 
 <BaseLayout title={post.data.title}>
   <div class="flex flex-row relative">
-    <div>
+    <section>
       <Article post={post} />
       <div class="my-10 border-t-1 border-zinc-800/5"></div>
       <Comments client:visible />
-    </div>
+    </section>
 
-    <aside class="ml-20 sticky h-0 top-[25%]">
-      <Toc headings={headings} />
+    <aside class="ml-10 sticky h-0 top-[25%]">
+      <Toc headings={headings} client:idle />
     </aside>
   </div>
 </BaseLayout>
