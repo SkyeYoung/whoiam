@@ -9,10 +9,21 @@ const { Content } = await render(post);
 <article class="mt-[80px] px-2 min-w-3xl">
   <section class="mb-10">
     <ItemDate post={post.data} />
-    <h1 class="font-bold text-4xl" transition:name={`${post.data.slug}-title`}>
+    <h1
+      class="font-bold text-4xl my-4"
+      transition:name={`${post.data.slug}-title`}
+    >
       {post.data.title}
     </h1>
-    <div class="flex gap-2 mt-4 justify-end border-t-1 border-zinc-800/5 py-2">
+    {
+      post.data.description && (
+        <p itemprop="description" class="text-zinc-400 pb-4">
+          {post.data.description}
+        </p>
+      )
+    }
+    <hr class="text-zinc-800/5" />
+    <div class="flex gap-2 justify-end py-2">
       <ItemTags post={post.data} />
     </div>
   </section>

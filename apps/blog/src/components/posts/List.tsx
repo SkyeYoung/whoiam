@@ -9,7 +9,7 @@ type Props = {
 export const ItemDate = ({ post }: Props) => {
   return (
     <div
-      className="text-xs"
+      className="text-xs text-zinc-600"
       style={{ viewTransitionName: `${post.slug}-date` }}
     >
       {dayjs(post.created_at).format('YYYY 年 MM 月 DD 日')}
