@@ -2,8 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { sortByCreatedAt } from '../../utils/collection';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { ItemDate, ItemTags } from '@/components/posts/List';
-import Comments from '@/components/posts/Comments.astro';
+import { Comments } from '@/components/posts/Comments';
 import Article from '@/components/posts/Article.astro';
 import { Toc } from '@/components/posts/Toc';
 
@@ -30,7 +29,7 @@ const { headings } = await render(post);
     <div>
       <Article post={post} />
       <div class="my-10 border-t-1 border-zinc-800/5"></div>
-      <Comments />
+      <Comments client:visible />
     </div>
 
     <aside class="ml-20 sticky h-0 top-[25%]">
