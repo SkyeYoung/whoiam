@@ -46,6 +46,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@types/lodash-es": "^4.17.12",
     "unplugin-icons": "^22.1.0",
-    "unplugin-info": "^1.2.2"
+    "unplugin-info": "^1.2.2",
+    "vite-plugin-static-copy": "^3.0.0"
   }
 }

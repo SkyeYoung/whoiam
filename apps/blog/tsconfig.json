@@ -14,7 +14,9 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "blog/assets/*": ["./src/assets/blog/*"],
+      "friends/assets/*": ["./src/assets/friends/*"],
     },
     "types": ["unplugin-icons/types/react"]
   },

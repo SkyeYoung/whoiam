@@ -1,6 +1,7 @@
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 import path from 'path';
+import { parse } from 'yaml';
 
 export const blogSchema = z.object({
   title: z.string(),
@@ -16,14 +17,33 @@ export const blogSchema = z.object({
 
 export type BlogSchema = z.infer<typeof blogSchema>;
 
+const contentDir = path.resolve(process.cwd(), '../../content');
+
 const blog = defineCollection({
   loader: glob({
     pattern: ['**/*.md', '**/*.mdx'],
-    base: path.resolve(process.cwd(), '../../content/blog'),
+    base: path.join(contentDir, 'blog'),
   }),
   schema: blogSchema,
 });
 
+export const friendSchema = z.object({
+  id: z.string(),
+  url: z.string().url(),
+  img: z.string(),
+  desc: z.string().optional(),
+});
+
+export type FriendSchema = z.infer<typeof friendSchema>;
+
+export const friends = defineCollection({
+  loader: file(path.join(contentDir, 'friends/links.yaml'), {
+    parser: (text) => parse(text),
+  }),
+  schema: friendSchema,
+});
+
 export const collections = {
   blog,
+  friends,
 };
