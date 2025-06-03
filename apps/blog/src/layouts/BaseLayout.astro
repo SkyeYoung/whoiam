@@ -2,13 +2,15 @@
 import { Footer } from '@/components/layouts/Footer';
 import { Header } from '@/components/layouts/Header';
 import { siteConfig } from '@/configs/site';
-import '@/styles/global.css';
+import clsx from 'clsx';
 import { ClientRouter } from 'astro:transitions';
+import '@/styles/global.css';
 
 interface Props {
   title?: string;
+  className?: string;
 }
-const { title: pageTitle } = Astro.props;
+const { title: pageTitle, className } = Astro.props;
 const title = pageTitle
   ? `${pageTitle} | ${siteConfig.title}`
   : siteConfig.title;
@@ -30,7 +32,7 @@ const title = pageTitle
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class={clsx('min-h-screen flex flex-col', className)}>
     <Header />
     <main class="flex-1 mx-auto max-w-3xl 2xl:max-w-4xl">
       <slot />

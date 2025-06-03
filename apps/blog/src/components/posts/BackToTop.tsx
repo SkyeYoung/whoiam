@@ -21,7 +21,7 @@ export const BackToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }}
       className={clsx(
-        'p-3 rounded-full text-zinc-400 hover:text-zinc-800 duration-300 flex items-center gap-2 transition-all ease-in-out',
+        'mt-6 rounded-full text-zinc-400 hover:text-zinc-800 duration-300 flex items-center gap-2 transition-all ease-in-out',
         show ? 'opacity-100' : 'opacity-0'
       )}
     >
