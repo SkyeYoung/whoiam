@@ -1,6 +1,6 @@
 ---
-import { getCollection, render } from 'astro:content';
-import { sortByCreatedAt } from '../../utils/collection';
+import { render } from 'astro:content';
+import { getBlogCollection } from '../../utils/collection';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Comments } from '@/components/posts/Comments';
 import Article from '@/components/posts/Article.astro';
@@ -9,14 +9,13 @@ import { BackToTop } from '@/components/posts/BackToTop';
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  const sortedPosts = posts.toSorted(sortByCreatedAt);
-  return sortedPosts.map((post, i) => ({
+  const posts = await getBlogCollection();
+  return posts.map((post, i) => ({
     params: { slug: post.data.slug },
     props: {
       post,
-      prevPost: sortedPosts[i - 1],
-      nextPost: sortedPosts[i + 1],
+      prevPost: posts[i - 1],
+      nextPost: posts[i + 1],
     },
   }));
 }

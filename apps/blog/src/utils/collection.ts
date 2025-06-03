@@ -1,8 +1,47 @@
+import { getCollection } from 'astro:content';
 import type { BlogSchema } from '../content.config';
 
 type BlogCollection = { data: BlogSchema };
 
 // Sort by created_at desc
-export const sortByCreatedAt = (a: BlogCollection, b: BlogCollection) => {
+const sortByCreatedAt = (a: BlogCollection, b: BlogCollection) => {
   return b.data.created_at.getTime() - a.data.created_at.getTime();
 };
+
+type GetBlogCollectionOpt = Partial<
+  Pick<BlogCollection['data'], 'categories' | 'tags' | 'draft'>
+>;
+export const getBlogCollection = async (
+  opt: GetBlogCollectionOpt = { draft: false }
+) => {
+  const posts = await getCollection('blog');
+  return posts.toSorted(sortByCreatedAt).filter((post) => {
+    let hasThis = true;
+    if (opt.draft !== undefined) {
+      hasThis = opt.draft === post.data.draft;
+    }
+    if (opt.categories?.length) {
+      hasThis = opt.categories.some((c) => post.data.categories.includes(c));
+    }
+    if (opt.tags?.length) {
+      hasThis = opt.tags.some((t) => post.data.tags.includes(t));
+    }
+    return hasThis;
+  });
+};
+
+const getBlogInfoCount = async (
+  opt: Extract<keyof BlogCollection['data'], 'tags' | 'categories'>
+) => {
+  const posts = await getBlogCollection();
+  const map = new Map<string, number>();
+  for (const post of posts) {
+    for (const tag of post.data[opt]) {
+      map.set(tag, (map.get(tag) || 0) + 1);
+    }
+  }
+  return map;
+};
+
+export const getBlogTagsCount = () => getBlogInfoCount('tags');
+export const getBlogCategoriesCount = () => getBlogInfoCount('categories');

@@ -1,21 +1,20 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import { getCollection } from 'astro:content';
-import { sortByCreatedAt } from '../../utils/collection';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { List, ListItem } from '@/components/posts/List';
 import { ListPagination } from '@/components/posts/ListPagination';
+import { getBlogCollection } from '../../utils/collection';
+import Heading from '@/components/layouts/Heading.astro';
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const posts = await getCollection('blog');
-  const sortedPosts = posts.toSorted(sortByCreatedAt);
-  return paginate(sortedPosts, { pageSize: 6 });
+  const posts = await getBlogCollection();
+  return paginate(posts, { pageSize: 6 });
 }) satisfies GetStaticPaths;
 const { page } = Astro.props;
 ---
 
 <BaseLayout>
-  {page.currentPage === 1 && <h2 class="font-bold mb-4 mt-20">近期文章</h2>}
+  {page.currentPage === 1 && <Heading>近期文章</Heading>}
 
   <List>
     {page.data.map((post) => <ListItem post={post.data} />)}
