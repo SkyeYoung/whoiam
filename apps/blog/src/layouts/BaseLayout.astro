@@ -1,6 +1,6 @@
 ---
 import { Footer } from '@/components/layouts/Footer';
-import { Header } from '@/components/layouts/Header';
+import Header from '@/components/layouts/Header.astro';
 import { siteConfig } from '@/configs/site';
 import clsx from 'clsx';
 import { ClientRouter } from 'astro:transitions';
@@ -34,7 +34,7 @@ const title = pageTitle
   </head>
   <body class={clsx('min-h-screen flex flex-col', className)}>
     <Header />
-    <main class="flex-1 mx-auto max-w-3xl 2xl:max-w-4xl">
+    <main class="flex-1 mx-auto max-w-3xl 2xl:max-w-4xl" data-pagefind-body>
       <slot />
     </main>
     <Footer />

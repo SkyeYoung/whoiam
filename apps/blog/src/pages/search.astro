@@ -1,0 +1,15 @@
+---
+import Heading from '@/components/layouts/Heading.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SearchInput from 'astro-pagefind/components/Search';
+---
+
+<BaseLayout title="Search">
+  {/* just for margin-top */}
+  <Heading />
+  <SearchInput
+    id="search"
+    className="pagefind-ui min-w-3xl"
+    uiOptions={{ showImages: false }}
+  />
+</BaseLayout>

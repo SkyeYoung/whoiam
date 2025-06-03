@@ -1,0 +1,21 @@
+---
+import { siteConfig } from '@/configs/site';
+---
+
+<header class="nav sticky top-0 z-50 px-4 py-4 flex">
+  <div
+    class="px-6 text-xl rounded-2xl shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md"
+  >
+    <div class="logo left-0 uppercase">
+      <a href="/">{siteConfig.title}</a>
+    </div>
+  </div>
+  <div
+    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-6 px-6 text-xl rounded-2xl shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md"
+  >
+    <a href="/">首页</a>
+    <a href="/tags">标签</a>
+    <a href="/search">搜索</a>
+    <a href="/friends">友链</a>
+  </div>
+</header>

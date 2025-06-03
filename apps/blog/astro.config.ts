@@ -13,7 +13,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkGemoji from 'remark-gemoji';
 import { remarkAlert } from 'remark-github-blockquote-alert';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
-
+import pagefind from 'astro-pagefind';
 import type { AstroUserConfig } from 'astro';
 
 const mdOpts = {
@@ -38,6 +38,7 @@ export default defineConfig({
     sitemap(),
     mdx(mdOpts as unknown as MdxOptions),
     unpluginInfo(),
+    pagefind(),
   ],
   prefetch: {
     prefetchAll: true,
