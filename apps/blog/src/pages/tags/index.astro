@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getBlogTagsCount } from '@/utils/collection';
+import Heading from '@/components/layouts/Heading.astro';
+import HashTagIcon from '~icons/my/hash-tag';
+
+const tags = await getBlogTagsCount();
+---
+
+<BaseLayout title="tags" className="flex justify-center">
+  <Heading className="flex justify-center">
+    <HashTagIcon style={{ viewTransitionName: 'hash-tag-icon' }} />
+  </Heading>
+  <ul class="flex gap-5">
+    {
+      Array.from(tags.entries()).map(([tag, count]) => (
+        <li>
+          <a href={`/tags/${tag}`}>
+            <span transition:name={tag}>{tag}</span>
+            <span class="text-zinc-400 text-sm">({count})</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

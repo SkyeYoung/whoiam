@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getBlogCollection, getBlogTagsCount } from '@/utils/collection';
+import { List, ListItem } from '@/components/posts/List';
+import type { GetStaticPaths } from 'astro';
+import Heading from '@/components/layouts/Heading.astro';
+import HashTagIcon from '~icons/my/hash-tag';
+
+export const getStaticPaths = (async () => {
+  const tags = await getBlogTagsCount();
+  return await Promise.all(
+    Array.from(tags.entries()).map(async ([tag, count]) => {
+      const posts = await getBlogCollection({ tags: [tag] });
+      return {
+        params: { tag },
+        props: { posts, count, tag },
+      };
+    })
+  );
+}) satisfies GetStaticPaths;
+const { posts, tag } = Astro.props;
+---
+
+<BaseLayout title={tag}>
+  <Heading>
+    <span class="flex">
+      <HashTagIcon style={{ viewTransitionName: 'hash-tag-icon' }} />
+      <span transition:name={tag}>{tag}</span>
+    </span>
+  </Heading>
+  <List>
+    {posts.map((post) => <ListItem post={post.data} />)}
+  </List>
+</BaseLayout>
