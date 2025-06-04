@@ -9,7 +9,7 @@ tags:
   - astro
 categories: []
 created_at: 2025-05-31T16:51:28.232Z
-updated_at: 2025-06-02T15:39:53.398Z
+updated_at: 2025-06-04T16:33:00.531Z
 fmContentType: blog
 ---
 
@@ -18,23 +18,28 @@ Hello! :tada:
 **Test markdown features...**
 
 ## H2
+
 followed by some text
 
 ### H3
+
 followed by some text
 
 #### H4
+
 followed by some text
 
 ##### H5
+
 followed by some text
 
 ###### H6
+
 followed by some text
 
 ## Autolink literals
 
-www.example.com, https://example.com, and contact@example.com.
+<www.example.com>, <https://example.com>, and <contact@example.com>.
 
 ## Test Footnote
 
@@ -56,7 +61,7 @@ A note[^1]
 * [ ] to do
 * [x] done
 
-Auto-detected link: https://giscus.vercel.app
+Auto-detected link: <https://giscus.vercel.app>
 
 Can render `inline code`, *italics*, **strong**, :smile:
 
@@ -71,8 +76,8 @@ Horizontal rule:
 
 |Table Header 1|Table Header 2           |
 |--------------|-------------------------|
-|Content       | https://github.com/laymonage/giscus       |
-|Content       |http://github.com:\<te>|
+|Content       | <https://github.com/laymonage/giscus>       |
+|Content       |<http://github.com:\><te>|
 I'm below the table.
 
 A table with an empty cell and unaligned indenting.
@@ -81,7 +86,6 @@ A table with an empty cell and unaligned indenting.
 |--------------|--------------|
 |Content  |  Content        |
 |Content       |      |
-
 
 ```js
 var test = function this_is(){
@@ -94,21 +98,23 @@ var test = function this_is(){
 + print('Hello, world!')
 ```
 
-https://github.com/giscus/giscus/blob/32bbb29c460f537946aca611f6faf55d318b26ab/lib/utils.ts#L34-L43
+<https://github.com/giscus/giscus/blob/32bbb29c460f537946aca611f6faf55d318b26ab/lib/utils.ts#L34-L43>
 
-https://github.com/giscus/giscus/blob/72fac059a3ee54e0c3782cb362987c9801df068e/services/github/getAppAccessToken.ts#L31-L47
+<https://github.com/giscus/giscus/blob/72fac059a3ee54e0c3782cb362987c9801df068e/services/github/getAppAccessToken.ts#L31-L47>
 
 ![image link](https://octodex.github.com/images/hula_loop_octodex03.gif)
 
-Test from https://github.com/suan/github-flavored-markdown-test
+Test from <https://github.com/suan/github-flavored-markdown-test>
 
-Test math renderer error:
+### Mermaid
 
-${\{\{¶∆✓¥€¢|π✓©&#//)()(%£€\{π√×¶obrigada€¢¥™£®}\\∆×]✓\\€¢£¥✓\\pelas#@\")(\"\"¢¥¥π÷✓]¶×∆¢π°flores$@&€¢£¥amei////)($#®€¢£¥}💖
+```mermaid
+flowchart LR
+    Start --> Stop
+```
 
-When  $a \ne 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are 
-$$x = {-b \\pm \sqrt{b^2-4ac} \over 2a}$$
+### Math
 
-**The Cauchy-Schwarz Inequality**
-
-$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+```math
+L = \frac{1}{2} \rho v^2 S C_L
+```

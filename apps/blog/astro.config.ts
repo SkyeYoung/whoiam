@@ -15,9 +15,26 @@ import { remarkAlert } from 'remark-github-blockquote-alert';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 import pagefind from 'astro-pagefind';
 import type { AstroUserConfig } from 'astro';
+import remarkDirective from 'remark-directive';
+import remarkMath from 'remark-math';
+import remarkDirectiveRehype from 'remark-directive-rehype';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
+import remarkBreaks from 'remark-breaks';
+import rehypeKatex from 'rehype-katex';
+import { rehypeMermaid } from '@beoe/rehype-mermaid';
+import { getCache } from '@beoe/cache';
+const cache = await getCache();
 
 const mdOpts = {
-  remarkPlugins: [remarkGemoji, remarkAlert],
+  remarkPlugins: [
+    remarkBreaks,
+    remarkGemoji,
+    remarkAlert,
+    remarkDirective,
+    remarkDirectiveRehype,
+    remarkMath,
+  ],
   rehypePlugins: [
     rehypeSlug,
     [
@@ -26,13 +43,31 @@ const mdOpts = {
         behavior: 'append',
       },
     ],
+    rehypeKatex,
+    rehypeInferReadingTimeMeta,
+    [
+      rehypeMermaid,
+      {
+        strategy: 'data-url', // alternatively use "data-url"
+        fsPath: 'public/mermaid', // add this to gitignore
+        webPath: '/mermaid',
+        darkScheme: 'class',
+        cache,
+      },
+    ],
   ],
 };
 
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.site,
-  markdown: { ...(mdOpts as AstroUserConfig['markdown']) },
+  markdown: {
+    ...(mdOpts as AstroUserConfig['markdown']),
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid', 'math'],
+    },
+  },
   integrations: [
     react(),
     sitemap(),
@@ -57,6 +92,7 @@ export default defineConfig({
           ),
         },
       }),
+      tsconfigPaths(),
     ] as any[],
   },
 });
