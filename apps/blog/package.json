@@ -15,8 +15,6 @@
     "@astrojs/react": "^4.3.0",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.4.0",
-    "@beoe/cache": "^0.1.1",
-    "@beoe/rehype-mermaid": "^0.4.2",
     "@giscus/react": "^3.1.0",
     "@nanostores/react": "^1.0.0",
     "@tailwindcss/vite": "^4.1.8",

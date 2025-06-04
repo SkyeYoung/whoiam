@@ -22,9 +22,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
 import remarkBreaks from 'remark-breaks';
 import rehypeKatex from 'rehype-katex';
-import { rehypeMermaid } from '@beoe/rehype-mermaid';
-import { getCache } from '@beoe/cache';
-const cache = await getCache();
+import rehypeMermaid from 'rehype-mermaid';
 
 const mdOpts = {
   remarkPlugins: [
@@ -48,11 +46,7 @@ const mdOpts = {
     [
       rehypeMermaid,
       {
-        strategy: 'data-url', // alternatively use "data-url"
-        fsPath: 'public/mermaid', // add this to gitignore
-        webPath: '/mermaid',
-        darkScheme: 'class',
-        cache,
+        strategy: 'inline-svg',
       },
     ],
   ],

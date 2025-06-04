@@ -9,7 +9,7 @@ tags:
   - astro
 categories: []
 created_at: 2025-05-31T16:51:28.232Z
-updated_at: 2025-06-04T16:33:00.531Z
+updated_at: 2025-06-04T17:03:10.938Z
 fmContentType: blog
 ---
 
@@ -104,13 +104,14 @@ var test = function this_is(){
 
 ![image link](https://octodex.github.com/images/hula_loop_octodex03.gif)
 
-Test from <https://github.com/suan/github-flavored-markdown-test>
-
 ### Mermaid
 
 ```mermaid
-flowchart LR
-    Start --> Stop
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 ```
 
 ### Math
