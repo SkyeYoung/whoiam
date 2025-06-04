@@ -14,7 +14,6 @@ import remarkGemoji from 'remark-gemoji';
 import { remarkAlert } from 'remark-github-blockquote-alert';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 import pagefind from 'astro-pagefind';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import type { AstroUserConfig } from 'astro';
 
 const mdOpts = {
@@ -57,18 +56,6 @@ export default defineConfig({
             svg.replace(/^<svg /, '<svg fill="currentColor" ')
           ),
         },
-      }),
-      viteStaticCopy({
-        targets: [
-          {
-            src: '../../content/blog/assets',
-            dest: './src/assets/blog',
-          },
-          {
-            src: '../../content/friends/assets',
-            dest: './src/assets/friends',
-          },
-        ],
       }),
     ] as any[],
   },

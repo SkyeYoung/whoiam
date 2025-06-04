@@ -27,20 +27,23 @@ const blog = defineCollection({
   schema: blogSchema,
 });
 
-export const friendSchema = z.object({
-  id: z.string(),
-  url: z.string().url(),
-  img: z.string(),
-  desc: z.string().optional(),
-});
-
-export type FriendSchema = z.infer<typeof friendSchema>;
-
 export const friends = defineCollection({
   loader: file(path.join(contentDir, 'friends/links.yaml'), {
-    parser: (text) => parse(text),
+    parser: (text) => {
+      const data = parse(text) as { img: string }[];
+      return data.map((item) => ({
+        ...item,
+        img: path.join(contentDir, 'friends/assets', item.img),
+      }));
+    },
   }),
-  schema: friendSchema,
+  schema: ({ image }) =>
+    z.object({
+      id: z.string(),
+      url: z.string().url(),
+      img: image(),
+      desc: z.string().optional(),
+    }),
 });
 
 export const collections = {
