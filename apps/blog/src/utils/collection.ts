@@ -14,20 +14,20 @@ type GetBlogCollectionOpt = Partial<
 export const getBlogCollection = async (
   opt: GetBlogCollectionOpt = { draft: false }
 ) => {
-  const posts = await getCollection('blog');
-  return posts.toSorted(sortByCreatedAt).filter((post) => {
+  const posts = await getCollection('blog', ({ data }) => {
     let hasThis = true;
     if (opt.draft !== undefined) {
-      hasThis = opt.draft === post.data.draft;
+      hasThis = opt.draft === data.draft;
     }
     if (opt.categories?.length) {
-      hasThis = opt.categories.some((c) => post.data.categories.includes(c));
+      hasThis = opt.categories.some((c) => data.categories.includes(c));
     }
     if (opt.tags?.length) {
-      hasThis = opt.tags.some((t) => post.data.tags.includes(t));
+      hasThis = opt.tags.some((t) => data.tags.includes(t));
     }
     return hasThis;
   });
+  return posts.toSorted(sortByCreatedAt);
 };
 
 const getBlogInfoCount = async (
