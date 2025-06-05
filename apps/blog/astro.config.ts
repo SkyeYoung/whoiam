@@ -5,67 +5,34 @@ import sitemap from '@astrojs/sitemap';
 import { siteConfig } from './src/configs/site';
 
 import tailwindcss from '@tailwindcss/vite';
-import mdx, { type MdxOptions } from '@astrojs/mdx';
+import mdx from '@astrojs/mdx';
 import unpluginInfo from 'unplugin-info/astro';
 import unpluginIcons from 'unplugin-icons/vite';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import remarkGemoji from 'remark-gemoji';
-import { remarkAlert } from 'remark-github-blockquote-alert';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 import pagefind from 'astro-pagefind';
-import type { AstroUserConfig } from 'astro';
-import remarkDirective from 'remark-directive';
-import remarkMath from 'remark-math';
-import remarkDirectiveRehype from 'remark-directive-rehype';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
-import remarkBreaks from 'remark-breaks';
-import rehypeKatex from 'rehype-katex';
-import rehypeMermaid from 'rehype-mermaid';
-
-const mdOpts = {
-  remarkPlugins: [
-    remarkBreaks,
-    remarkGemoji,
-    remarkAlert,
-    remarkDirective,
-    remarkDirectiveRehype,
-    remarkMath,
-  ],
-  rehypePlugins: [
-    rehypeSlug,
-    [
-      rehypeAutolinkHeadings,
-      {
-        behavior: 'append',
-      },
-    ],
-    rehypeKatex,
-    rehypeInferReadingTimeMeta,
-    [
-      rehypeMermaid,
-      {
-        strategy: 'inline-svg',
-      },
-    ],
-  ],
-};
+import { rehypePlugins, remarkPlugins, shikiConfig } from './src/configs/md';
 
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.site,
   markdown: {
-    ...(mdOpts as AstroUserConfig['markdown']),
+    remarkPlugins,
+    rehypePlugins,
     syntaxHighlight: {
       type: 'shiki',
       excludeLangs: ['mermaid', 'math'],
     },
+    shikiConfig,
   },
   integrations: [
-    react(),
+    react({
+      experimentalReactChildren: true,
+    }),
     sitemap(),
-    mdx(mdOpts as unknown as MdxOptions),
+    mdx({
+      optimize: true,
+    }),
     unpluginInfo(),
     pagefind(),
   ],

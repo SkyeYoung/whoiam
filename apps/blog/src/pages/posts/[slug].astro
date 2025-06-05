@@ -3,9 +3,11 @@ import { render } from 'astro:content';
 import { getBlogCollection } from '../../utils/collection';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Comments } from '@/components/posts/Comments';
-import Article from '@/components/posts/Article.astro';
 import { Toc } from '@/components/posts/Toc';
 import { BackToTop } from '@/components/posts/BackToTop';
+import ArticleHeader from '@/components/posts/ArticleHeader.astro';
+import Content from '@/components/posts/Content';
+import '/node_modules/katex/dist/katex.min.css';
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -21,16 +23,22 @@ export async function getStaticPaths() {
 }
 // 2. For your template, you can get the entry directly from the prop
 const { post, prevPost, nextPost } = Astro.props;
-const { headings } = await render(post);
+const { headings, Content: MDXContent } = await render(post);
+const isMDX = post.filePath?.endsWith('mdx');
 ---
 
 <BaseLayout title={post.data.title}>
   <div class="flex flex-row relative">
-    <section>
-      <Article post={post} />
+    <article class="mt-[80px] px-2 min-w-3xl">
+      <ArticleHeader post={post} />
+      <div
+        class="prose prose-h1:font-bold prose-h1:text-xl prose-a:no-underline prose-a:hover:text-blue-600 prose-p:text-justify prose-img:rounded-xl"
+      >
+        {isMDX ? <MDXContent /> : <Content data={post.body ?? ''} />}
+      </div>
       <div class="my-10 border-t-1 border-zinc-800/5"></div>
       <Comments client:visible />
-    </section>
+    </article>
 
     <aside class="ml-10 sticky h-0 top-[25%]">
       <div class="backdrop-blur-md shadow-zinc-800/5 rounded-md p-2">
