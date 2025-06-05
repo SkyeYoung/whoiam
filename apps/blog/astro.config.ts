@@ -26,9 +26,7 @@ export default defineConfig({
     shikiConfig,
   },
   integrations: [
-    react({
-      experimentalReactChildren: true,
-    }),
+    react(),
     sitemap(),
     mdx({
       optimize: true,
