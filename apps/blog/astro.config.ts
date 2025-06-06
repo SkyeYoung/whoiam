@@ -12,10 +12,14 @@ import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 import pagefind from 'astro-pagefind';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { rehypePlugins, remarkPlugins, shikiConfig } from './src/configs/md';
+import path from 'path';
+
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
   site: siteConfig.site,
+
   markdown: {
     remarkPlugins,
     rehypePlugins,
@@ -25,6 +29,7 @@ export default defineConfig({
     },
     shikiConfig,
   },
+
   integrations: [
     react(),
     sitemap(),
@@ -34,11 +39,19 @@ export default defineConfig({
     unpluginInfo(),
     pagefind(),
   ],
+
   experimental: {
     responsiveImages: true,
     contentIntellisense: true,
   },
+
   vite: {
+    define: {
+      __PROJECT__: {
+        root: path.resolve(import.meta.dirname, '../..'),
+        dir: import.meta.dirname,
+      },
+    },
     plugins: [
       tailwindcss(),
       unpluginIcons({
@@ -54,4 +67,9 @@ export default defineConfig({
       tsconfigPaths(),
     ] as any[],
   },
+
+  output: 'static',
+  adapter: vercel({
+    imageService: true,
+  }),
 });

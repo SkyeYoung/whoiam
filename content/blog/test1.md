@@ -9,7 +9,7 @@ tags:
   - astro
 categories: []
 created_at: 2025-05-31T16:51:28.232Z
-updated_at: 2025-06-05T16:38:24.916Z
+updated_at: 2025-06-06T01:36:41.707Z
 fmContentType: blog
 ---
 
@@ -61,6 +61,8 @@ A note[^1]
 ## Image
 
 ![image link](https://octodex.github.com/images/hula_loop_octodex03.gif)
+
+![test](./assets/test.jpg)
 
 ## Links
 
