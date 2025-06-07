@@ -15,6 +15,9 @@ import { rehypePlugins, remarkPlugins, shikiConfig } from './src/configs/md';
 import path from 'path';
 
 import vercel from '@astrojs/vercel';
+import createSymlink from './vite-plugin-create-symlink';
+
+const curDir = import.meta.dirname;
 
 // https://astro.build/config
 export default defineConfig({
@@ -48,11 +51,20 @@ export default defineConfig({
   vite: {
     define: {
       __PROJECT__: {
-        root: path.resolve(import.meta.dirname, '../..'),
-        dir: import.meta.dirname,
+        dir: curDir,
+        root: path.resolve(curDir, '../..'),
+        content: path.resolve(curDir, '../../content'),
       },
     },
     plugins: [
+      createSymlink({
+        links: [
+          {
+            source: path.resolve(curDir, '../../content'),
+            target: path.resolve(curDir, './src/content'),
+          },
+        ],
+      }),
       tailwindcss(),
       unpluginIcons({
         compiler: 'jsx',
@@ -65,7 +77,7 @@ export default defineConfig({
         },
       }),
       tsconfigPaths(),
-    ] as any[],
+    ],
   },
 
   output: 'static',
