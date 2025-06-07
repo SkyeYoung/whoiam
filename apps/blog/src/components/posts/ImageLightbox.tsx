@@ -66,6 +66,15 @@ export const ImageLightboxViewer: React.FC = () => {
       on={{
         view: handleView,
       }}
+      carousel={{
+        finite: false,
+        preload: 2,
+      }}
+      controller={{
+        closeOnBackdropClick: true,
+        closeOnPullDown: true,
+        closeOnPullUp: true,
+      }}
       zoom={{
         scrollToZoom: true,
       }}

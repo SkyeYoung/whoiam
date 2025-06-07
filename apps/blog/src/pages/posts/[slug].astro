@@ -48,5 +48,5 @@ const isMDX = post.filePath?.endsWith('mdx');
       </div>
     </aside>
   </div>
-  <ImageLightboxViewer client:idle />
+  {post.body?.includes('![') && <ImageLightboxViewer client:idle />}
 </BaseLayout>
