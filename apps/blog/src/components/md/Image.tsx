@@ -8,8 +8,8 @@ const BasicImage = (props: BasicImageProps) => {
   return (
     <figure>
       <img
-        className="cursor-zoom-in rounded border-solid border-gray-300 border-1 object-cover"
-        {...omit(props, 'node')}
+        className="cursor-zoom-in rounded border-solid border-gray-300 border-1 object-cover lightbox-image"
+        {...omit(props, 'node', 'inputtedwidth')}
       />
       <figcaption className="text-sm text-gray-500 mt-2">
         <span className="select-none">— </span>

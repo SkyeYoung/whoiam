@@ -7,6 +7,7 @@ import { Toc } from '@/components/posts/Toc';
 import { BackToTop } from '@/components/posts/BackToTop';
 import ArticleHeader from '@/components/posts/ArticleHeader.astro';
 import Content from '@/components/posts/Content';
+import { ImageLightboxViewer } from '@/components/posts/ImageLightbox';
 import '/node_modules/katex/dist/katex.min.css';
 
 // 1. Generate a new path for every collection entry
@@ -47,4 +48,5 @@ const isMDX = post.filePath?.endsWith('mdx');
       </div>
     </aside>
   </div>
+  <ImageLightboxViewer client:idle />
 </BaseLayout>

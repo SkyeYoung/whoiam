@@ -37,19 +37,20 @@ export const getLocalPlaceholder = async (src: string) => {
 };
 
 export const toImgAttrs = (imgResult: GetImageResult) => {
-  const attrs = {
+  const rawSrc = imgResult.rawOptions.src;
+  return {
     ...imgResult.options,
     ...imgResult.attributes,
     srcSet: imgResult.srcSet.attribute,
     src: imgResult.src.toString(),
+    'data-raw-src': typeof rawSrc === 'string' ? rawSrc : rawSrc.src,
   };
-  return omit(attrs, 'inputtedwidth');
 };
 
 export const getLocalImage = async (src: string) => {
   const imageKey = getLocalImageKey(src);
   const imgMeta = await getLocalImageMetadata(imageKey);
-  const img = await getImage({ src: imgMeta });
+  const img = await getImage({ src: imgMeta, quality: 60 });
 
   return {
     attrs: toImgAttrs(img),
