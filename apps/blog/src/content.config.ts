@@ -17,23 +17,22 @@ export const blogSchema = z.object({
 
 export type BlogSchema = z.infer<typeof blogSchema>;
 
-const contentDir = path.resolve(process.cwd(), '../../content');
 
 const blog = defineCollection({
   loader: glob({
-    pattern: ['**/*.md', '**/*.mdx'],
-    base: path.join(contentDir, 'blog'),
+    pattern: ['./*.md', './*.mdx'],
+    base: path.join(__PROJECT__.content, 'blog'),
   }),
   schema: blogSchema,
 });
 
 export const friends = defineCollection({
-  loader: file(path.join(contentDir, 'friends/links.yaml'), {
+  loader: file(path.join(__PROJECT__.content, 'friends/links.yaml'), {
     parser: (text) => {
       const data = parse(text) as { img: string }[];
       return data.map((item) => ({
         ...item,
-        img: path.join(contentDir, 'friends/assets', item.img),
+        img: path.join(__PROJECT__.content, 'friends/assets', item.img),
       }));
     },
   }),
