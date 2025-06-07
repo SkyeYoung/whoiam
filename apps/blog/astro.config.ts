@@ -43,6 +43,10 @@ export default defineConfig({
     pagefind(),
   ],
 
+  image: {
+    experimentalLayout: 'full-width',
+  },
+
   experimental: {
     responsiveImages: true,
     contentIntellisense: true,
