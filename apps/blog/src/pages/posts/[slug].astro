@@ -35,7 +35,7 @@ const isMDX = post.filePath?.endsWith('mdx');
       <article class="px-2 min-w-3xl">
         <ArticleHeader post={post} />
         <section
-          class="prose prose-h1:font-bold prose-h1:text-xl prose-a:no-underline prose-a:hover:text-blue-600 prose-p:text-justify heti"
+          class="heti prose prose-h1:font-bold prose-h1:text-xl prose-a:no-underline prose-a:border-b prose-a:border-zinc-800/25 prose-a:border-dashed prose-a:hover:text-blue-600 prose-p:text-justify prose-pre:rounded-md prose-pre:border prose-pre:border-zinc-800/25 prose-pre:bg-zinc-900/5"
         >
           {isMDX ? <MDXContent /> : <Content data={post.body ?? ''} />}
         </section>

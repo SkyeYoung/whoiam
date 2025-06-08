@@ -18,9 +18,7 @@ body {
   @apply scroll-smooth overflow-y-scroll;
 }
 
-article * {
-  scroll-margin-top: 20vh;
-
+article {
   p {
     text-align: justify;
     text-align-last: left;
@@ -46,6 +44,8 @@ article * {
   .prose h4,
   .prose h5,
   .prose h6 {
+    scroll-margin-top: 20vh;
+
     &:hover {
       @apply underline;
 
