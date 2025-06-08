@@ -10,6 +10,7 @@ import rehypeInferReadingTimeMeta from 'rehype-infer-reading-time-meta';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import { transformerTwoslash } from '@shikijs/twoslash';
+import { rehypeMermaid } from '../utils/rehype-mermaid';
 
 export const remarkPlugins = [
   remarkBreaks,
@@ -30,6 +31,7 @@ export const rehypePlugins = [
   ],
   rehypeKatex,
   rehypeInferReadingTimeMeta,
+  rehypeMermaid,
 ] satisfies RehypePlugins;
 
 export const shikiConfig = {

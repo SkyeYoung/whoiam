@@ -1,0 +1,77 @@
+<script>
+  // @ts-nocheck
+  import mermaid from 'mermaid/dist/mermaid.esm.min.mjs';
+
+  let initialized = false;
+
+  async function initializeMermaid() {
+    if (initialized) return;
+
+    mermaid.default?.initialize?.({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose',
+      fontFamily: 'inherit',
+      themeVariables: {
+        primaryColor: '#f9f9f9',
+        primaryTextColor: '#333',
+        primaryBorderColor: '#ccc',
+        lineColor: '#666',
+        sectionBkgColor: '#f0f0f0',
+        altSectionBkgColor: '#e0e0e0',
+        gridColor: '#ddd',
+        secondaryColor: '#f9f9f9',
+        tertiaryColor: '#f9f9f9',
+      },
+    });
+
+    initialized = true;
+  }
+
+  async function renderMermaidDiagrams() {
+    const mermaidEls = document.querySelectorAll('.mermaid-diagram');
+    if (mermaidEls.length === 0) return;
+
+    await initializeMermaid();
+
+    for (const element of mermaidEls) {
+      const mermaidCode = element.getAttribute('data-mermaid');
+      if (!mermaidCode) continue;
+
+      try {
+        const id = `mermaid-${Math.random().toString(36).substring(2, 11)}`;
+        const { svg } = await mermaid.render(id, mermaidCode);
+
+        // Replace the entire content with the rendered SVG
+        element.innerHTML = svg;
+        element.classList.add('mermaid-rendered');
+      } catch (error) {
+        console.error('Mermaid rendering error:', error);
+
+        // Show error message
+        element.innerHTML = `
+        <div class="mermaid-error p-4 border border-red-300 rounded bg-red-50 text-red-700">
+          <p class="font-semibold">Mermaid Diagram Error:</p>
+          <pre class="mt-2 text-sm whitespace-pre-wrap">${
+            error instanceof Error ? error.message : 'Failed to render diagram'
+          }</pre>
+          <details class="mt-2">
+            <summary class="cursor-pointer text-sm">Show source</summary>
+            <pre class="mt-2 text-xs bg-red-100 p-2 rounded overflow-auto">${mermaidCode}</pre>
+          </details>
+        </div>
+      `;
+      }
+    }
+  }
+
+  // Auto-run when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderMermaidDiagrams);
+  } else {
+    renderMermaidDiagrams();
+  }
+
+  // Re-run when navigating in SPA mode (if using View Transitions)
+  document.addEventListener('astro:page-load', renderMermaidDiagrams);
+</script>
