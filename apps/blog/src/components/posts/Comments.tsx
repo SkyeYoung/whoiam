@@ -28,7 +28,7 @@ export const Comments = () => {
     <section className="relative min-h-80">
       <div
         className={clsx(
-          'absolute top-0 left-0 z-10 backdrop-blur-xl rounded-xl w-full h-full bg-zinc-800/5 flex items-center justify-center text-zinc-600 transition-all duration-300 ease-in-out',
+          'absolute top-0 left-0 z-10 backdrop-blur-xl rounded-md w-full h-full bg-zinc-800/5 flex items-center justify-center text-zinc-600 transition-all duration-300 ease-in-out',
           loading ? 'opacity-100' : 'opacity-0 h-0'
         )}
       >

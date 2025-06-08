@@ -29,6 +29,6 @@ const { posts, tag } = Astro.props;
     </span>
   </Heading>
   <List>
-    {posts.map((post) => <ListItem post={post.data} />)}
+    {posts.map((post) => <ListItem post={post.data} client:load />)}
   </List>
 </BaseLayout>

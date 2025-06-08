@@ -17,7 +17,7 @@ const { page } = Astro.props;
   {page.currentPage === 1 && <Heading>近期文章</Heading>}
 
   <List>
-    {page.data.map((post) => <ListItem post={post.data} />)}
+    {page.data.map((post) => <ListItem post={post.data} client:idle />)}
   </List>
 
   <ListPagination page={page} />

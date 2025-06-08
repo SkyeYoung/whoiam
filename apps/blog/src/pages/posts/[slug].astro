@@ -47,7 +47,7 @@ const isMDX = post.filePath?.endsWith('mdx');
       <Comments client:visible />
     </div>
     <aside class="ml-10 sticky h-0 top-[10%]">
-      <div class="backdrop-blur-md shadow-zinc-800/5 rounded-md p-2">
+      <div class="backdrop-blur-md shadow-zinc-800/5 rounded-md">
         <Toc headings={headings} client:idle />
         <BackToTop client:idle />
       </div>

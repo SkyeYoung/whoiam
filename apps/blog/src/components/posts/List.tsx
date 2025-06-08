@@ -1,7 +1,9 @@
 import type { BlogSchema } from '@/content.config';
 import type { PropsWithChildren } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
-import MaterialSymbolsLightTag from '~icons/material-symbols-light/tag';
+import { navigate } from 'astro:transitions/client';
+
 type Props = {
   post: BlogSchema;
 };
@@ -23,14 +25,17 @@ export const ItemDate = ({ post }: Props) => {
 export const ItemTags = ({ post }: Props) => {
   return (
     <div
-      className="tags flex gap-1 text-sm"
+      className="tags flex gap-2 text-sm"
       style={{ viewTransitionName: `${post.slug}-tags` }}
     >
-      {post.tags.map((tag, idx) => (
-        <div className="flex items-center" key={tag}>
-          <MaterialSymbolsLightTag className="-mr-0.5" />
+      {post.tags.map((tag) => (
+        <a
+          key={tag}
+          href={`/tags/${tag}`}
+          className="px-2 py-1 text-xs text-zinc-600 bg-zinc-100 rounded-md hover:bg-zinc-200 transition-colors duration-200 no-underline"
+        >
           {tag}
-        </div>
+        </a>
       ))}
     </div>
   );
@@ -46,11 +51,21 @@ const ItemFooter = ({ post }: Props) => {
 };
 
 export const ListItem = ({ post }: Props) => {
+  const link = `/posts/${post.slug}`;
+  const handleItemClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'A' || target.closest('a')) {
+      return;
+    }
+    e.preventDefault();
+    navigate(link);
+  };
+
   return (
     <li>
-      <a
-        className="min-w-xl flex flex-col rounded-2xl px-4 py-3 border-dashed border-zinc-800/5 border-1"
-        href={`/posts/${post.slug}`}
+      <div
+        className="min-w-xl flex flex-col rounded-2xl px-4 py-3 border-dashed border-zinc-800/5 border-1 hover:bg-zinc-50 transition-colors duration-200 cursor-pointer"
+        onClick={handleItemClick}
       >
         <ItemDate post={post} />
         <h2
@@ -59,7 +74,12 @@ export const ListItem = ({ post }: Props) => {
             viewTransitionName: `${post.slug}-title`,
           }}
         >
-          {post.title}
+          <a
+            href={link}
+            className="hover:text-violet-800 transition-colors duration-200 no-underline"
+          >
+            {post.title}
+          </a>
         </h2>
         {post.description.length >= 200 && (
           <div
@@ -72,7 +92,7 @@ export const ListItem = ({ post }: Props) => {
           </div>
         )}
         <ItemFooter post={post} />
-      </a>
+      </div>
     </li>
   );
 };

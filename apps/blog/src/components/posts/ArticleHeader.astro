@@ -10,22 +10,16 @@ const { post }: Props = Astro.props;
 ---
 
 <section class="mb-10">
-  <div class="flex justify-between">
-    <ItemDate post={post.data} />
-    <ItemTags post={post.data} />
-  </div>
+  <ItemDate post={post.data} />
+
   <h1
-    class="font-bold text-4xl my-4"
+    class="font-bold text-4xl mt-3 mb-3"
     transition:name={`${post.data.slug}-title`}
   >
     {post.data.title}
   </h1>
-  {
-    post.data.description && (
-      <p itemprop="description" class="text-zinc-400 pb-4">
-        {post.data.description}
-      </p>
-    )
-  }
-  <hr class="text-zinc-800/5" />
+
+  <ItemTags post={post.data} />
+
+  <hr class="text-zinc-800/5 mt-6" />
 </section>

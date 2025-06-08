@@ -11,13 +11,16 @@ const tags = await getBlogTagsCount();
   <Heading className="flex justify-center">
     <HashTagIcon style={{ viewTransitionName: 'hash-tag-icon' }} />
   </Heading>
-  <ul class="flex gap-5">
+  <ul class="flex flex-wrap gap-3 justify-center">
     {
       Array.from(tags.entries()).map(([tag, count]) => (
         <li>
-          <a href={`/tags/${tag}`}>
+          <a
+            href={`/tags/${tag}`}
+            class="inline-flex items-center gap-1 px-3 py-1 text-sm text-zinc-600 bg-zinc-100 rounded-md hover:bg-zinc-200 transition-colors duration-200"
+          >
             <span transition:name={tag}>{tag}</span>
-            <span class="text-zinc-400 text-sm">({count})</span>
+            <span class="text-zinc-400 text-xs">({count})</span>
           </a>
         </li>
       ))
