@@ -27,7 +27,7 @@ export const ItemTags = ({ post }: Props) => {
       style={{ viewTransitionName: `${post.slug}-tags` }}
     >
       {post.tags.map((tag, idx) => (
-        <div className="flex" key={tag}>
+        <div className="flex items-center" key={tag}>
           <MaterialSymbolsLightTag className="-mr-0.5" />
           {tag}
         </div>

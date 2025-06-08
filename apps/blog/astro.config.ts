@@ -13,8 +13,6 @@ import pagefind from 'astro-pagefind';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { rehypePlugins, remarkPlugins, shikiConfig } from './src/configs/md';
 import path from 'path';
-
-import vercel from '@astrojs/vercel';
 import createSymlink from './vite-plugin-create-symlink';
 
 const curDir = import.meta.dirname;
@@ -85,7 +83,4 @@ export default defineConfig({
   },
 
   output: 'static',
-  adapter: vercel({
-    imageService: true,
-  }),
 });
