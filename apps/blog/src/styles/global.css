@@ -14,6 +14,12 @@
   }
 }
 
+@layer components {
+  .a-underline {
+    @apply no-underline border-b border-zinc-800/25 border-dashed hover:text-violet-800/80;
+  }
+}
+
 body {
   @apply scroll-smooth overflow-y-scroll;
 }
