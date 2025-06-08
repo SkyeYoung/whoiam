@@ -102,7 +102,8 @@ const updatePathD = (points: Position[], path: SVGPathElement) => {
   return { idPointObj };
 };
 
-export const Toc = ({ headings }: { headings: MarkdownHeading[] }) => {
+export const Toc = (props: { headings: MarkdownHeading[] }) => {
+  const headings = props.headings.filter((h) => h.depth <= 4);
   const allIds = headings.map((h) => h.slug);
   const visibles = useVisibles(allIds);
 
