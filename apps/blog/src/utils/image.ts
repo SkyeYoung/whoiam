@@ -54,7 +54,8 @@ export const toImgAttrs = (imgResult: GetImageResult) => {
 export const getLocalImage = async (src: string) => {
   const imageKey = getLocalImageKey(src);
   const imgMeta = await getLocalImageMetadata(imageKey);
-  const img = await getImage({ src: imgMeta, quality: 60, format: 'webp' });
+  const img = await getImage({ src: imgMeta, quality: 60 });
+
   return {
     attrs: toImgAttrs(img),
     src: img.src.toString(),
