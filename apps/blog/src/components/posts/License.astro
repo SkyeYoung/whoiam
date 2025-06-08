@@ -1,0 +1,65 @@
+---
+import { siteConfig } from '@/configs/site';
+import type { CollectionEntry } from 'astro:content';
+import dayjs from 'dayjs';
+
+interface Props {
+  post: CollectionEntry<'blog'>['data'];
+}
+
+const { post } = Astro.props;
+
+const info = [
+  {
+    key: '文章标题',
+    value: post.title,
+  },
+  {
+    key: '文章链接',
+    value: `${siteConfig.site}/posts/${post.slug}`,
+  },
+  {
+    key: '文章作者',
+    value: siteConfig.author,
+  },
+  {
+    key: '发布时间',
+    value: dayjs(post.created_at).format('YYYY-MM-DD'),
+  },
+];
+---
+
+<div class="my-8 py-3 px-4 rounded-lg ring-1 ring-zinc-800/25 backdrop-blur-sm">
+  <div class="text-xs text-zinc-500 space-y-1">
+    {
+      info.map((item) => (
+        <div class="flex items-start">
+          <strong class="text-zinc-600">{item.key}</strong>：
+          <span class="text-zinc-800">
+            {item.value.startsWith('http') ? (
+              <a href={item.value} class="a-normal">
+                {item.value}
+              </a>
+            ) : (
+              item.value
+            )}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+  <hr class="my-2 text-zinc-200" />
+
+  <div class="text-sm text-zinc-600 leading-relaxed">
+    转载或引用本文时请遵守
+    <a
+      href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="a-normal"
+    >
+      CC BY-NC-SA 4.0
+    </a>
+    ，注明出处，不得用于商业用途。
+  </div>
+</div>

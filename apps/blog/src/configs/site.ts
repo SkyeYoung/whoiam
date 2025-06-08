@@ -6,6 +6,7 @@ const schema = z.object({
   site: z.string(),
   title: z.string(),
   description: z.string().default(''),
+  author: z.string().default(''),
 });
 
 export const siteConfig = await loadConfig({

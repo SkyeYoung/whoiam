@@ -8,6 +8,7 @@ import { BackToTop } from '@/components/posts/BackToTop';
 import ArticleHeader from '@/components/posts/ArticleHeader.astro';
 import Content from '@/components/posts/Content';
 import { ImageLightboxViewer } from '@/components/posts/ImageLightbox';
+import License from '@/components/posts/License.astro';
 import '/node_modules/katex/dist/katex.min.css';
 import Heti from '@/components/posts/Heti.astro';
 
@@ -39,6 +40,7 @@ const isMDX = post.filePath?.endsWith('mdx');
         >
           {isMDX ? <MDXContent /> : <Content data={post.body ?? ''} />}
         </section>
+        <License post={post.data} />
       </article>
       <div class="my-10 border-t-1 border-zinc-800/5"></div>
       <Comments client:visible />
