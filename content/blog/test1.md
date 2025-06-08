@@ -9,7 +9,7 @@ tags:
   - astro
 categories: []
 created_at: 2025-05-31T16:51:28.232Z
-updated_at: 2025-06-06T01:36:41.707Z
+updated_at: 2025-06-07T16:48:40.842Z
 fmContentType: blog
 ---
 
@@ -35,13 +35,9 @@ followed by some text
 
 ###### H6
 
-*italics*, **strong**, :smile:
+*italics*, **strong**, ~one~ or ~~two~~ tildes, :smile:
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id sem purus, eu commodo tortor. Donec malesuada ultricies dolor a eleifend. In hac habitasse platea dictumst. Vivamus a faucibus ligula. Nullam molestie tristique arcu, eu elementum metus ultricies sed. Aenean luctus congue lectus, vitae semper erat rhoncus non. Nulla facilisi.
-
-## Autolink literals
-
-<www.example.com>, <https://example.com>, and <contact@example.com>.
 
 ## Test Footnote
 
@@ -49,9 +45,25 @@ A note[^1]
 
 [^1]: Big note.
 
-## Strikethrough
+## List
 
-~one~ or ~~two~~ tildes.
+### Ordered
+
+1. A
+   1. A.A
+   2. A.B
+2. B
+3. C
+
+### UnOrdered
+
+- A
+  - A.A
+    - A.A.A
+    - A.A.B
+  - A.B
+- B
+- C
 
 ## Tasklist
 
@@ -66,7 +78,7 @@ A note[^1]
 
 ## Links
 
-Auto-detected link: <https://giscus.vercel.app>
+<www.example.com>, <https://example.com>, and <contact@example.com>.
 
 ## Blockquote
 
@@ -120,8 +132,12 @@ A table with an empty cell and unaligned indenting.
 | Content        | Content        |
 | Content        |                |
 
-### Math
+## Math
 
 ```math
 L = \frac{1}{2} \rho v^2 S C_L
 ```
+
+## 中英文混排、标点挤压
+
+Hello, world!古代称用以书写的小幅绢帛 with_spaces 后no_space亦以借指纸。《汉书·外戚传下·孝成赵皇后》：「武（籍武）发篋中，有裹药二枚，赫蹏书。」颜师古注：「邓展曰：『赫音兄弟鬩墙之鬩。』应劭曰：『赫蹏，薄小纸也。』」宋赵彦卫《云麓漫钞》卷七：「《赵后传》所谓『赫蹏』者，注云『薄小纸』，然其寔亦縑帛。」

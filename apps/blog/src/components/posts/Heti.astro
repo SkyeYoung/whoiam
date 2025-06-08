@@ -1,0 +1,11 @@
+---
+import '@/styles/heti.css';
+---
+
+<script is:inline src="/node_modules/heti/umd/heti-addon.min.js"></script>
+<script is:inline>
+  const heti = new Heti('.heti');
+  // document.addEventListener('astro:page-load', () => {
+  heti.spacingElements(document.querySelectorAll(heti.rootSelector));
+  // });
+</script>

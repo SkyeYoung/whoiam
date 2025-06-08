@@ -9,6 +9,7 @@ import ArticleHeader from '@/components/posts/ArticleHeader.astro';
 import Content from '@/components/posts/Content';
 import { ImageLightboxViewer } from '@/components/posts/ImageLightbox';
 import '/node_modules/katex/dist/katex.min.css';
+import Heti from '@/components/posts/Heti.astro';
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -30,17 +31,18 @@ const isMDX = post.filePath?.endsWith('mdx');
 
 <BaseLayout title={post.data.title}>
   <div class="flex flex-row relative">
-    <article class="mt-[80px] px-2 min-w-3xl">
-      <ArticleHeader post={post} />
-      <div
-        class="prose prose-h1:font-bold prose-h1:text-xl prose-a:no-underline prose-a:hover:text-blue-600 prose-p:text-justify"
-      >
-        {isMDX ? <MDXContent /> : <Content data={post.body ?? ''} />}
-      </div>
+    <div>
+      <article class="mt-[80px] px-2 min-w-3xl">
+        <ArticleHeader post={post} />
+        <section
+          class="prose prose-h1:font-bold prose-h1:text-xl prose-a:no-underline prose-a:hover:text-blue-600 prose-p:text-justify heti"
+        >
+          {isMDX ? <MDXContent /> : <Content data={post.body ?? ''} />}
+        </section>
+      </article>
       <div class="my-10 border-t-1 border-zinc-800/5"></div>
       <Comments client:visible />
-    </article>
-
+    </div>
     <aside class="ml-10 sticky h-0 top-[25%]">
       <div class="backdrop-blur-md shadow-zinc-800/5 rounded-md p-2">
         <Toc headings={headings} client:idle />
@@ -49,4 +51,5 @@ const isMDX = post.filePath?.endsWith('mdx');
     </aside>
   </div>
   {post.body?.includes('![') && <ImageLightboxViewer client:idle />}
+  <Heti />
 </BaseLayout>
