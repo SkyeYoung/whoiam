@@ -1,4 +1,5 @@
 ---
+import { getLocalPlaceholder } from '@/utils/image';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { friend } = Astro.props;
+const placeholder = await getLocalPlaceholder(friend.img.src, true);
 ---
 
 <a
@@ -21,6 +23,7 @@ const { friend } = Astro.props;
       alt={friend.id}
       loading="lazy"
       class="w-full h-full object-cover"
+      style={placeholder.style}
     />
   </div>
   <div class="flex flex-col justify-center">

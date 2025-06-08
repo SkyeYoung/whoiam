@@ -8,11 +8,14 @@ const friends = await getCollection('friends');
 ---
 
 <BaseLayout title="友链">
-  <Heading>朋友们</Heading>
+  <Heading>旁友</Heading>
   <ul class="gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
     {
-      friends.map((friend) => (
-        <li>
+      friends.map((friend, i) => (
+        <li
+          class="animate-fade-in-up animate-duration-300 opacity-0 animate-fill-mode-forwards"
+          style={{ animationDelay: `${i * 100}ms` }}
+        >
           <FriendCard friend={friend.data} />
         </li>
       ))
