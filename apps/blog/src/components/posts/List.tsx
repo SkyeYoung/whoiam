@@ -23,7 +23,7 @@ export const ItemDate = ({ post }: Props) => {
 export const ItemTags = ({ post }: Props) => {
   return (
     <div
-      className="tags flex gap-1"
+      className="tags flex gap-1 text-sm"
       style={{ viewTransitionName: `${post.slug}-tags` }}
     >
       {post.tags.map((tag, idx) => (
