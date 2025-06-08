@@ -30,16 +30,21 @@ export const friends = defineCollection({
   loader: file(path.join(__PROJECT__.content, 'friends/links.yaml'), {
     parser: (text) => {
       const data = parse(text) as { img: string }[];
-      return data.map((item) => ({
-        ...item,
-        img: path.join(__PROJECT__.content, 'friends/assets', item.img),
-      }));
+      return data.map((item) => {
+        const img = path.join(__PROJECT__.content, 'friends/assets', item.img);
+        return {
+          ...item,
+          imgSrc: img,
+          img,
+        };
+      });
     },
   }),
   schema: ({ image }) =>
     z.object({
       id: z.string(),
       url: z.string().url(),
+      imgSrc: z.string(),
       img: image(),
       desc: z.string().optional(),
     }),

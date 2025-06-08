@@ -8,7 +8,8 @@ interface Props {
 }
 
 const { friend } = Astro.props;
-const placeholder = await getLocalPlaceholder(friend.img.src, true);
+
+const placeholder = await getLocalPlaceholder(friend.imgSrc, true);
 ---
 
 <a

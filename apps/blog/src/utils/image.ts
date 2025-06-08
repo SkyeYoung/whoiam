@@ -17,23 +17,18 @@ const getLocalImageMetadata = async (imageKey: string) => {
   return (await images[imageKey]()).default;
 };
 
-// /@fs/Users/xxxx/Dev/Projects/iam/content/friends/assets/xxxx.png?origWidth=384&origHeight=384&origFormat=png
-// => /Users/xxxx/Dev/Projects/iam/content/friends/assets/xxxx.png
-function extractFsPath(viteUrl: string) {
-  const match = viteUrl.match(/^\/@fs(\/[^?]+)/);
-  return match ? match[1] : null;
-}
-
-const getPlaceholderImage = async (src: string, isFs = false) => {
-  const realSrc = isFs ? extractFsPath(src) : resolve(__PROJECT__.dir, `./${getLocalImageKey(src)}`);
+const getPlaceholderImage = async (src: string, isAbsolute = false) => {
+  const realSrc = isAbsolute
+    ? src
+    : resolve(__PROJECT__.dir, `./${getLocalImageKey(src)}`);
   if (!realSrc) {
-    throw new Error('Invalid image fs path');
+    throw new Error(`Invalid image fs path: ${src}`);
   }
   return await lqip(realSrc);
 };
 
-export const getLocalPlaceholder = async (src: string, isFs = false) => {
-  const result = await getPlaceholderImage(src, isFs);
+export const getLocalPlaceholder = async (src: string, isAbsolute = false) => {
+  const result = await getPlaceholderImage(src, isAbsolute);
   const dataURIBase64 = result.metadata.dataURIBase64;
   return {
     dataURIBase64,
