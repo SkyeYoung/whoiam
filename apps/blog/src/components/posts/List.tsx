@@ -2,7 +2,6 @@ import type { BlogSchema } from '@/content.config';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import dayjs from 'dayjs';
-import { navigate } from 'astro:transitions/client';
 
 type Props = {
   post: BlogSchema;
@@ -58,7 +57,7 @@ export const ListItem = ({ post }: Props) => {
       return;
     }
     e.preventDefault();
-    navigate(link);
+    document.querySelector<HTMLAnchorElement>(`a[href="${link}"]`)?.click();
   };
 
   return (

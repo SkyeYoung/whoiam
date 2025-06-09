@@ -25,7 +25,7 @@ const { posts, tag } = Astro.props;
   <Heading>
     <span class="flex">
       <HashTagIcon style={{ viewTransitionName: 'hash-tag-icon' }} />
-      <span transition:name={tag}>{tag}</span>
+      <span transition:name={`tag-${tag}`}>{tag}</span>
     </span>
   </Heading>
   <List>
