@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "clean:favicons": "rm -rf public/favicons/*"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -63,6 +64,7 @@
   "devDependencies": {
     "@iconify-json/material-symbols": "^1.2.23",
     "@iconify-json/material-symbols-light": "^1.2.23",
+    "@iconify-json/ri": "^1.2.5",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@tailwindcss/typography": "^0.5.16",

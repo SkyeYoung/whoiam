@@ -11,6 +11,8 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import { transformerTwoslash } from '@shikijs/twoslash';
 import { rehypeMermaid } from '../utils/rehype-mermaid';
+import { rehypeExternalLinks } from '../utils/rehype-external-links';
+import { createFaviconCacher } from '../utils/rehype-external-links/favicon-cacher';
 
 export const remarkPlugins = [
   remarkBreaks,
@@ -20,6 +22,8 @@ export const remarkPlugins = [
   remarkDirectiveRehype as any,
   remarkMath,
 ] satisfies RemarkPlugins;
+
+const getFaviconLink = await createFaviconCacher();
 
 export const rehypePlugins = [
   rehypeSlug,
@@ -32,6 +36,12 @@ export const rehypePlugins = [
   rehypeKatex,
   rehypeInferReadingTimeMeta,
   rehypeMermaid,
+  [
+    rehypeExternalLinks,
+    {
+      getFaviconLink,
+    },
+  ],
 ] satisfies RehypePlugins;
 
 export const shikiConfig = {

@@ -1,6 +1,10 @@
 import { getLocalImage, getLocalPlaceholder } from '@/utils/image';
 import { inferRemoteSize } from 'astro:assets';
 import { omit } from 'lodash-es';
+import { join } from 'path';
+import RiEarthLine from '~icons/ri/earth-line';
+import clsx from 'clsx';
+import { fileExists } from '@/utils/common';
 
 type BasicImageProps = React.ImgHTMLAttributes<HTMLImageElement>;
 
@@ -30,9 +34,24 @@ const RemoteImage = async (props: BasicImageProps) => {
   return <BasicImage {...props} {...size} loading="lazy" decoding="async" />;
 };
 
+const FaviconImage = async (props: BasicImageProps) => {
+  const src = props.src!;
+
+  const filePath = join('./public', src);
+  if (await fileExists(filePath)) {
+    return <img {...props} />;
+  }
+  return (
+    <RiEarthLine className={clsx(props.className, 'text-zinc-500 text-base')} />
+  );
+};
+
 const Image = (props: BasicImageProps) => {
-  const isLocal = props.src!.startsWith('.');
-  if (isLocal) {
+  const src = props.src!;
+  if (src.startsWith('/favicons')) {
+    return <FaviconImage {...props} />;
+  }
+  if (src.startsWith('.') || src.startsWith('/')) {
     return <LocalImage {...props} />;
   }
   return <RemoteImage {...props} />;

@@ -1,6 +1,5 @@
 import type { GetImageResult } from 'astro';
 import { getImage } from 'astro:assets';
-import { omit } from 'lodash-es';
 import lqip from 'lqip-modern';
 import { resolve } from 'node:path';
 

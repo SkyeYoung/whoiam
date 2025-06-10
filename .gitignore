@@ -20,7 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+apps/blog/public/favicons/
+apps/blog/src/content
+
 # jetbrains setting folder
 .idea/
-/apps/blog/src/content
 .vercel
