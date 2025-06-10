@@ -1,4 +1,4 @@
-import MaterialSymbolsVerticalAlignTopRounded from '~icons/material-symbols/vertical-align-top-rounded';
+import RiArrowUpLine from '~icons/ri/arrow-up-line';
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
@@ -26,7 +26,7 @@ export const BackToTop = () => {
       )}
     >
       <div className="rounded-full p-1 bg-zinc-800/5 hover:bg-zinc-800/10 text-sm">
-        <MaterialSymbolsVerticalAlignTopRounded />
+        <RiArrowUpLine />
       </div>
       <span>回到顶部</span>
     </a>

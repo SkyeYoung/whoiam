@@ -1,7 +1,7 @@
 import type { MarkdownHeading } from 'astro';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
-import MaterialSymbolsMenuRounded from '~icons/material-symbols/menu-rounded';
+import RiMenu2Fill from '~icons/ri/menu-2-fill';
 
 type Position = Pick<DOMRect, 'x' | 'y'> & {
   id: string;
@@ -142,7 +142,7 @@ export const Toc = (props: { headings: MarkdownHeading[] }) => {
       ref={tocRef}
     >
       <div className="flex items-center gap-1">
-        <MaterialSymbolsMenuRounded className="text-xl" />
+        <RiMenu2Fill />
         <span>目录</span>
       </div>
       <svg
