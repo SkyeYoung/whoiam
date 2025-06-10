@@ -51,6 +51,9 @@ export default defineConfig({
   },
 
   vite: {
+    build: {
+      minify: false,
+    },
     define: {
       __PROJECT__: {
         dir: curDir,
