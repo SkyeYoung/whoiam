@@ -9,7 +9,7 @@ tags:
   - astro
 categories: []
 created_at: 2025-05-31T16:51:28.232Z
-updated_at: 2025-06-07T16:48:40.842Z
+updated_at: 2025-06-08T17:05:08.068Z
 fmContentType: blog
 ---
 
@@ -77,6 +77,8 @@ A note[^1]
 ![test](./assets/test.jpg)
 
 ## Links
+
+<https://google.com>, <https://github.com>
 
 <www.example.com>, <https://example.com>, and <contact@example.com>.
 
