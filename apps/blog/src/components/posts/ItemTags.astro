@@ -1,0 +1,26 @@
+---
+import type { BlogSchema } from '@/content.config';
+
+interface Props {
+  post: BlogSchema;
+}
+
+const { post } = Astro.props;
+---
+
+<div
+  class="tags flex gap-2 text-sm"
+  style={`view-transition-name: ${post.slug}-tags`}
+>
+  {
+    post.tags.map((tag) => (
+      <a
+        href={`/tags/${tag}`}
+        class="px-2 py-1 text-xs text-zinc-600 bg-zinc-100 rounded-md hover:bg-zinc-200 transition-colors duration-200 no-underline"
+      >
+        {tag}
+      </a>
+    ))
+  }
+</div>
+

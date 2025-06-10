@@ -1,0 +1,18 @@
+---
+import type { BlogSchema } from '@/content.config';
+import dayjs from 'dayjs';
+
+interface Props {
+  post: BlogSchema;
+}
+
+const { post } = Astro.props;
+---
+
+<div
+  class="text-xs text-zinc-600 pl-0.5"
+  style={`view-transition-name: ${post.slug}-date`}
+>
+  {dayjs(post.created_at).format('YYYY 年 MM 月 DD 日')}
+</div>
+

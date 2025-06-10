@@ -1,0 +1,17 @@
+---
+import type { BlogSchema } from '@/content.config';
+import ItemDate from './ItemDate.astro';
+import ItemTags from './ItemTags.astro';
+
+interface Props {
+  post: BlogSchema;
+}
+
+const { post } = Astro.props;
+---
+
+<div class="flex justify-between items-center text-sm mt-3">
+  <ItemDate post={post} />
+  <ItemTags post={post} />
+</div>
+
