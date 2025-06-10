@@ -1,6 +1,6 @@
 import type { BlogSchema } from '@/content.config';
 import type { PropsWithChildren } from 'react';
-import React from 'react';
+import React, { useRef } from 'react';
 import dayjs from 'dayjs';
 
 type Props = {
@@ -50,14 +50,14 @@ const ItemFooter = ({ post }: Props) => {
 };
 
 export const ListItem = ({ post }: Props) => {
-  const link = `/posts/${post.slug}`;
+  const ref = useRef<HTMLAnchorElement>(null);
   const handleItemClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
     if (target.tagName === 'A' || target.closest('a')) {
       return;
     }
     e.preventDefault();
-    document.querySelector<HTMLAnchorElement>(`a[href="${link}"]`)?.click();
+    ref.current?.click();
   };
 
   return (
@@ -74,7 +74,8 @@ export const ListItem = ({ post }: Props) => {
           }}
         >
           <a
-            href={link}
+            ref={ref}
+            href={`/posts/${post.slug}`}
             className="hover:text-violet-800 transition-colors duration-200 no-underline"
           >
             {post.title}
