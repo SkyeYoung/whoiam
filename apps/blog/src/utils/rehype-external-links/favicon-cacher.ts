@@ -103,6 +103,7 @@ export async function createFaviconCacher(opts: FaviconCacherOptions = {}) {
 
     // If already cached, return the path
     if (await fileExists(filePath)) {
+      console.log(`✅ Return cached favicon for ${url}`);
       return toLink(filename);
     }
 
@@ -117,7 +118,7 @@ export async function createFaviconCacher(opts: FaviconCacherOptions = {}) {
       const res = await getFavicon(url);
       // Validate if the response is a valid favicon
       if (!isValidFaviconResponse(res)) {
-        console.log(`⚠️  Invalid favicon response for ${url}`);
+        console.log(`⚠️ Invalid favicon response for ${url}`);
         return toLink(fallback);
       }
 
@@ -130,7 +131,7 @@ export async function createFaviconCacher(opts: FaviconCacherOptions = {}) {
       return toLink(filename);
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') {
-        console.log(`⏱️  Timeout while fetching favicon for ${url}`);
+        console.log(`⏱️ Timeout while fetching favicon for ${url}`);
       } else {
         console.error(`❌ Failed to cache favicon for ${url}:`, error);
       }

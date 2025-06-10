@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 
 export async function trimWhiteBorderFromBuffer(
-  inputBuffer: Uint8Array | ArrayBuffer,
+  inputBuffer: ArrayBuffer,
   tolerance: number = 10
 ): Promise<Buffer> {
   const image = sharp(inputBuffer);
@@ -74,7 +74,7 @@ export async function trimWhiteBorderFromBuffer(
       cropWidth < 4 ||
       cropHeight < 4
     ) {
-      return image.toBuffer();
+      return Buffer.from(inputBuffer);
     }
 
     // Perform the crop

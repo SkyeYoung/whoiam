@@ -22,7 +22,7 @@ export const ImageLightboxViewer: React.FC = () => {
 
       imageElements.forEach((img, index) => {
         imageData.push({
-          src: img.getAttribute('data-raw-src') || img.src,
+          src: img.src,
           alt: img.alt,
           imageFit: 'contain',
           // if width and height are not set, the image will be scaled to fit the container

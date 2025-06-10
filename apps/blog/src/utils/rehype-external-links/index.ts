@@ -57,23 +57,37 @@ export function rehypeExternalLinks(options: RehypeExternalLinksOptions) {
         const children: Element[] = [];
         if (showFavicon) {
           const faviconSrc = await getFaviconLink(href);
+          const className =
+            'favicon rounded-full inline-block mr-0.5 mt-0 mb-0.5 align-middle';
 
-          const faviconEl: Element = {
-            type: 'element',
-            tagName: 'img',
-            properties: {
-              src: faviconSrc,
-              alt: `${href} favicon`,
-              width: 16,
-              height: 16,
-              loading: 'lazy',
-              class:
-                'no-underline rounded-full inline-block mr-0.5 mt-0 mb-0.5 align-middle',
-            },
-            children: [],
-          };
+          if (faviconSrc.includes('none.ico')) {
+            const faviconEl: Element = {
+              type: 'element',
+              tagName: 'i',
+              properties: {
+                class: `${className} text-[1rem] icon-[ri--earth-line]`,
+              },
+              children: [],
+            };
 
-          children.push(faviconEl);
+            children.push(faviconEl);
+          } else {
+            const faviconEl: Element = {
+              type: 'element',
+              tagName: 'img',
+              properties: {
+                src: faviconSrc,
+                alt: `${href} favicon`,
+                width: 16,
+                height: 16,
+                loading: 'lazy',
+                class: className,
+              },
+              children: [],
+            };
+
+            children.push(faviconEl);
+          }
         }
 
         node.properties!.target = '_blank';

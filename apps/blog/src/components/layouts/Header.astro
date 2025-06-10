@@ -36,8 +36,8 @@ const links = [
           <a
             href={link.href}
             class:list={[
-              'text-gray-600 hover:text-gray-900 transition-colors',
-              Astro.url.pathname === link.href && 'text-gray-900',
+              'text-gray-500 hover:text-gray-900 transition-colors',
+              Astro.url.pathname.includes(link.href) && 'text-gray-900',
             ]}
           >
             {link.label}

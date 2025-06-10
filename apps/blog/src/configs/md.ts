@@ -13,6 +13,7 @@ import { transformerTwoslash } from '@shikijs/twoslash';
 import { rehypeMermaid } from '../utils/rehype-mermaid';
 import { rehypeExternalLinks } from '../utils/rehype-external-links';
 import { createFaviconCacher } from '../utils/rehype-external-links/favicon-cacher';
+import rehypeImage from '../utils/rehype-image';
 
 export const remarkPlugins = [
   remarkBreaks,
@@ -36,6 +37,7 @@ export const rehypePlugins = [
   rehypeKatex,
   rehypeInferReadingTimeMeta,
   rehypeMermaid,
+  rehypeImage,
   [
     rehypeExternalLinks,
     {
