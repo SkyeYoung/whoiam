@@ -1,0 +1,101 @@
+<script is:inline>
+  // Unified theme management system
+  window.ThemeManager = {
+    init() {
+      this.applyTheme();
+      // Only init toggle button if DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () =>
+          this.initToggleButton()
+        );
+      } else {
+        this.initToggleButton();
+      }
+    },
+
+    getCurrentTheme() {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark' || stored === 'light') {
+        return stored;
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    },
+
+    applyTheme(theme) {
+      const currentTheme = theme || this.getCurrentTheme();
+      const isDark = currentTheme === 'dark';
+
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      this.updateToggleButton(isDark);
+    },
+
+    toggleTheme() {
+      const currentTheme = this.getCurrentTheme();
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      // Prevent transition flash
+      document.documentElement.classList.add('no-transition');
+
+      // Update localStorage and apply theme
+      localStorage.setItem('theme', newTheme);
+      this.applyTheme(newTheme);
+
+      // Re-enable transitions
+      setTimeout(() => {
+        document.documentElement.classList.remove('no-transition');
+      }, 50);
+    },
+
+    updateToggleButton(isDark) {
+      const toggleBtn = document.getElementById('theme-toggle');
+      if (toggleBtn) {
+        toggleBtn.classList.toggle('active', isDark);
+      }
+    },
+
+    initToggleButton() {
+      const toggleBtn = document.getElementById('theme-toggle');
+      if (!toggleBtn) return;
+
+      // Remove existing listeners to prevent duplicates
+      const newToggleBtn = toggleBtn.cloneNode(true);
+      toggleBtn.parentNode?.replaceChild(newToggleBtn, toggleBtn);
+
+      // Add click handler
+      newToggleBtn.addEventListener('click', () => this.toggleTheme());
+
+      // Set initial state
+      const isDark = this.getCurrentTheme() === 'dark';
+      this.updateToggleButton(isDark);
+    },
+  };
+
+  // Initialize theme immediately (for preventing flash)
+  window.ThemeManager.applyTheme();
+
+  // Full initialization when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () =>
+      window.ThemeManager.init()
+    );
+  } else {
+    window.ThemeManager.init();
+  }
+
+  // Re-initialize after page navigation (Astro View Transitions)
+  document.addEventListener('astro:after-swap', () => {
+    window.ThemeManager.init();
+  });
+
+  // Also handle astro:page-load for better compatibility
+  document.addEventListener('astro:page-load', () => {
+    window.ThemeManager.initToggleButton();
+  });
+</script>

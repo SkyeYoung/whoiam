@@ -1,6 +1,7 @@
 ---
 import Footer from '@/components/layouts/Footer.astro';
 import Header from '@/components/layouts/Header.astro';
+import ThemeScript from '@/components/layouts/ThemeScript.astro';
 import { siteConfig } from '@/configs/site';
 import clsx from 'clsx';
 import { ClientRouter } from 'astro:transitions';
@@ -31,27 +32,7 @@ const title = pageTitle
       href={new URL('rss.xml', siteConfig.site)}
     />
     <title>{title}</title>
-    <script is:inline>
-      // Theme initialization script - prevent flash of unstyled content
-      function initializeTheme() {
-        const theme = localStorage.getItem('theme');
-        const isDark =
-          theme === 'dark' ||
-          (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-        if (isDark) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      }
-
-      // Initialize theme immediately
-      initializeTheme();
-
-      // Re-initialize theme after each page navigation
-      document.addEventListener('astro:after-swap', initializeTheme);
-    </script>
+    <ThemeScript />
     <ClientRouter />
   </head>
   <body

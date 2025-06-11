@@ -10,10 +10,6 @@
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  html.no-transition {
-    transition: none !important;
-  }
-
   h1 {
     @apply text-2xl;
   }
@@ -73,10 +69,11 @@
 }
 
 @layer utilities {
-  .no-transition *,
-  .no-transition *::before,
-  .no-transition *::after {
-    transition: none !important;
-    animation: none !important;
+  .no-transition  {
+    *:not(header *),
+    *:not(header *)::before,
+    *:not(header *)::after {
+      @apply transition-none animate-none;
+    }
   }
 }
