@@ -3,7 +3,17 @@
 @plugin '@midudev/tailwind-animations';
 @plugin "@iconify/tailwind4";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
+  html {
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  html.no-transition {
+    transition: none !important;
+  }
+
   h1 {
     @apply text-2xl;
   }
@@ -13,52 +23,60 @@
   h3 {
     @apply text-lg;
   }
+  body {
+    @apply scroll-smooth overflow-y-scroll;
+  }
+
+  article {
+    p {
+      text-align: justify;
+      text-align-last: left;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+
+    span.icon-link {
+      @apply pl-1 absolute;
+      &::after {
+        @apply transition-all content-[''] block h-[1em] w-0 bg-[currentColor];
+
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        mask-image: url('data:image/svg+xml,%3Csvg%20width%3D%2222.339%22%20height%3D%2225.244%22%20viewBox%3D%220%200%2022.339%2025.244%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%3Cg%20id%3D%22svgGroup%22%20stroke-linecap%3D%22round%22%20fill-rule%3D%22evenodd%22%20font-size%3D%229pt%22%20stroke%3D%22currentColor%22%0A%20%20%20%20stroke-width%3D%220.25mm%22%20fill%3D%22currentColor%22%20style%3D%22stroke%3AcurrentColor%3Bstroke-width%3A0.25mm%3Bfill%3AcurrentColor%22%3E%0A%20%20%20%20%3Cpath%0A%20%20%20%20%20%20d%3D%22M%201.343%2011.89%20L%201.587%209.399%20L%205.127%209.155%20L%205.444%202.148%20L%2010.645%201.196%20L%209.351%208.789%20L%2012.5%208.545%20L%2013.477%200%20L%2019.678%200.854%20L%2017.749%208.154%20L%2022.339%207.739%20L%2021.387%2011.792%20L%2016.748%2011.841%20L%2015.845%2015.137%20L%2020.093%2014.941%20L%2019.043%2019.336%20L%2014.746%2019.141%20L%2013.086%2025.244%20L%2010.596%2024.902%20L%2011.279%2018.994%20L%207.642%2018.799%20L%206.592%2025.146%20L%204.541%2025.049%20L%204.785%2018.652%20L%200%2018.384%20L%200.244%2015.747%20L%204.883%2015.552%20L%205.029%2011.89%20L%201.343%2011.89%20Z%20M%208.838%2011.841%20L%208.228%2015.454%20L%2011.694%2015.308%20L%2012.085%2011.841%20L%208.838%2011.841%20Z%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E');
+      }
+    }
+
+    .prose h1,
+    .prose h2,
+    .prose h3,
+    .prose h4,
+    .prose h5,
+    .prose h6 {
+      scroll-margin-top: 20vh;
+
+      &:hover {
+        @apply underline;
+
+        span.icon-link::after {
+          @apply w-[1em];
+        }
+      }
+    }
+  }
 }
 
 @layer components {
   .a-normal {
-    @apply text-zinc-800 border-b border-zinc-800/25 border-dashed hover:text-violet-800/80 hover:border-violet-800/50 transition-colors no-underline;
+    @apply text-zinc-800 dark:text-zinc-200 border-b border-zinc-800/25 dark:border-zinc-200/25 border-dashed hover:text-violet-800/80 dark:hover:text-violet-400/80 hover:border-violet-800/50 dark:hover:border-violet-400/50 transition-colors no-underline;
   }
 }
 
-body {
-  @apply scroll-smooth overflow-y-scroll;
-}
-
-article {
-  p {
-    text-align: justify;
-    text-align-last: left;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-
-  span.icon-link {
-    @apply pl-1 absolute;
-    &::after {
-      @apply transition-all content-[''] block h-[1em] w-0 bg-[currentColor];
-
-      mask-repeat: no-repeat;
-      mask-size: contain;
-      mask-image: url('data:image/svg+xml,%3Csvg%20width%3D%2222.339%22%20height%3D%2225.244%22%20viewBox%3D%220%200%2022.339%2025.244%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%3Cg%20id%3D%22svgGroup%22%20stroke-linecap%3D%22round%22%20fill-rule%3D%22evenodd%22%20font-size%3D%229pt%22%20stroke%3D%22currentColor%22%0A%20%20%20%20stroke-width%3D%220.25mm%22%20fill%3D%22currentColor%22%20style%3D%22stroke%3AcurrentColor%3Bstroke-width%3A0.25mm%3Bfill%3AcurrentColor%22%3E%0A%20%20%20%20%3Cpath%0A%20%20%20%20%20%20d%3D%22M%201.343%2011.89%20L%201.587%209.399%20L%205.127%209.155%20L%205.444%202.148%20L%2010.645%201.196%20L%209.351%208.789%20L%2012.5%208.545%20L%2013.477%200%20L%2019.678%200.854%20L%2017.749%208.154%20L%2022.339%207.739%20L%2021.387%2011.792%20L%2016.748%2011.841%20L%2015.845%2015.137%20L%2020.093%2014.941%20L%2019.043%2019.336%20L%2014.746%2019.141%20L%2013.086%2025.244%20L%2010.596%2024.902%20L%2011.279%2018.994%20L%207.642%2018.799%20L%206.592%2025.146%20L%204.541%2025.049%20L%204.785%2018.652%20L%200%2018.384%20L%200.244%2015.747%20L%204.883%2015.552%20L%205.029%2011.89%20L%201.343%2011.89%20Z%20M%208.838%2011.841%20L%208.228%2015.454%20L%2011.694%2015.308%20L%2012.085%2011.841%20L%208.838%2011.841%20Z%22%20%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E');
-    }
-  }
-
-  .prose h1,
-  .prose h2,
-  .prose h3,
-  .prose h4,
-  .prose h5,
-  .prose h6 {
-    scroll-margin-top: 20vh;
-
-    &:hover {
-      @apply underline;
-
-      span.icon-link::after {
-        @apply w-[1em];
-      }
-    }
+@layer utilities {
+  .no-transition *,
+  .no-transition *::before,
+  .no-transition *::after {
+    transition: none !important;
+    animation: none !important;
   }
 }

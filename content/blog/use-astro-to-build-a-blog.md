@@ -7,7 +7,7 @@ tags:
   - astro
 categories: []
 created_at: 2025-05-31T16:51:28.232Z
-updated_at: 2025-06-10T14:27:26.230Z
+updated_at: 2025-06-10T16:27:23.419Z
 fmContentType: blog
 ---
 
@@ -26,3 +26,9 @@ const isMDX = post.filePath?.endsWith('mdx');
 {isMDX ? <MDXContent /> : <Content data={post.body ?? ''} />}
 </div>
 ```
+
+但在使用中，我遇到了两个难题：
+1. 本地构建预览和 Vercel 部署后的水合结果不一样
+2. 使用 react-markdown 渲染明显要比 Astro 自己提供的慢很多
+
+

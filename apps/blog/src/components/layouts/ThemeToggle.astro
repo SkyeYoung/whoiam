@@ -1,0 +1,113 @@
+<button
+  id="theme-toggle"
+  class="relative w-12 h-12 border-0 bg-transparent rounded-xl cursor-pointer p-0 flex items-center justify-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 theme-toggle-btn"
+  title="Toggle theme"
+>
+  <div class="relative w-5 h-5 flex items-center justify-center">
+    <svg
+      class="absolute top-0 left-0 transition-all duration-300 ease-out sun-icon"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+
+    <svg
+      class="absolute top-0 left-0 transition-all duration-300 ease-out moon-icon"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </div>
+</button>
+
+<style>
+  .sun-icon {
+    @apply opacity-100 rotate-0 scale-100 origin-center;
+  }
+
+  .moon-icon {
+    @apply opacity-0 rotate-90 scale-50 origin-center;
+  }
+
+  .theme-toggle-btn.active .sun-icon {
+    @apply opacity-0 -rotate-90 scale-50;
+  }
+
+  .theme-toggle-btn.active .moon-icon {
+    @apply opacity-100 rotate-0 scale-100;
+  }
+</style>
+
+<script>
+  function initThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (!toggleBtn) {
+      return;
+    }
+
+    // Clean up any existing event listeners to prevent duplicates
+    const newToggleBtn = toggleBtn.cloneNode(true) as HTMLButtonElement;
+    toggleBtn.parentNode?.replaceChild(newToggleBtn, toggleBtn);
+    const btn = newToggleBtn;
+
+    // Initialize button state based on current theme
+    const isDark = document.documentElement.classList.contains('dark');
+    if (isDark) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+
+    function toggleTheme() {
+      if (!btn) return;
+
+      const isDark = document.documentElement.classList.contains('dark');
+
+      // Add no-transition class to prevent flash during theme change
+      document.documentElement.classList.add('no-transition');
+
+      // Toggle theme
+      if (isDark) {
+        localStorage.setItem('theme', 'light');
+        document.documentElement.classList.remove('dark');
+        btn.classList.remove('active');
+      } else {
+        localStorage.setItem('theme', 'dark');
+        document.documentElement.classList.add('dark');
+        btn.classList.add('active');
+      }
+
+      // Remove no-transition class after a brief delay
+      setTimeout(() => {
+        document.documentElement.classList.remove('no-transition');
+      }, 50);
+    }
+    btn.addEventListener('click', toggleTheme);
+  }
+
+  // Initialize on page load and after page swaps (View Transitions)
+  document.addEventListener('astro:page-load', initThemeToggle);
+  document.addEventListener('astro:after-swap', initThemeToggle);
+</script>

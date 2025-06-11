@@ -7,22 +7,36 @@
   async function initializeMermaid() {
     if (initialized) return;
 
+    const isDark = document.documentElement.classList.contains('dark');
+
     mermaid.default?.initialize?.({
       startOnLoad: false,
-      theme: 'default',
+      theme: isDark ? 'dark' : 'default',
       securityLevel: 'loose',
       fontFamily: 'inherit',
-      themeVariables: {
-        primaryColor: '#f9f9f9',
-        primaryTextColor: '#333',
-        primaryBorderColor: '#ccc',
-        lineColor: '#666',
-        sectionBkgColor: '#f0f0f0',
-        altSectionBkgColor: '#e0e0e0',
-        gridColor: '#ddd',
-        secondaryColor: '#f9f9f9',
-        tertiaryColor: '#f9f9f9',
-      },
+      themeVariables: isDark
+        ? {
+            primaryColor: '#374151',
+            primaryTextColor: '#f3f4f6',
+            primaryBorderColor: '#6b7280',
+            lineColor: '#9ca3af',
+            sectionBkgColor: '#1f2937',
+            altSectionBkgColor: '#111827',
+            gridColor: '#4b5563',
+            secondaryColor: '#374151',
+            tertiaryColor: '#374151',
+          }
+        : {
+            primaryColor: '#f9f9f9',
+            primaryTextColor: '#333',
+            primaryBorderColor: '#ccc',
+            lineColor: '#666',
+            sectionBkgColor: '#f0f0f0',
+            altSectionBkgColor: '#e0e0e0',
+            gridColor: '#ddd',
+            secondaryColor: '#f9f9f9',
+            tertiaryColor: '#f9f9f9',
+          },
     });
 
     initialized = true;
@@ -74,4 +88,15 @@
 
   // Re-run when navigating in SPA mode (if using View Transitions)
   document.addEventListener('astro:page-load', renderMermaidDiagrams);
+
+  // Listen for theme changes and re-initialize mermaid
+  const observer = new MutationObserver(() => {
+    initialized = false; // Reset initialization flag
+    renderMermaidDiagrams();
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
 </script>

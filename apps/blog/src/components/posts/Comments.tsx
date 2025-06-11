@@ -4,7 +4,25 @@ import { useEffect, useRef, useState } from 'react';
 
 export const Comments = () => {
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const giscusRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(isDark ? 'dark' : 'light');
+
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'dark' : 'light');
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const giscus = giscusRef.current;
@@ -22,7 +40,7 @@ export const Comments = () => {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [theme]);
 
   return (
     <section className="relative min-h-80">
@@ -43,7 +61,7 @@ export const Comments = () => {
           mapping="url"
           reactionsEnabled="1"
           emitMetadata="1"
-          theme="light"
+          theme={theme}
           lang="en"
         />
       </div>

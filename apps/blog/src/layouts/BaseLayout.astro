@@ -31,11 +31,37 @@ const title = pageTitle
       href={new URL('rss.xml', siteConfig.site)}
     />
     <title>{title}</title>
+    <script is:inline>
+      // Theme initialization script - prevent flash of unstyled content
+      function initializeTheme() {
+        const theme = localStorage.getItem('theme');
+        const isDark =
+          theme === 'dark' ||
+          (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+
+      // Initialize theme immediately
+      initializeTheme();
+
+      // Re-initialize theme after each page navigation
+      document.addEventListener('astro:after-swap', initializeTheme);
+    </script>
     <ClientRouter />
   </head>
-  <body class={clsx('min-h-screen flex flex-col', className)}>
+  <body
+    class={clsx(
+      'min-h-screen flex flex-col bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors',
+      className
+    )}
+  >
     <Header />
-    <main class="flex-1 mx-auto max-w-3xl 2xl:max-w-4xl" data-pagefind-body>
+    <main class="flex-1 mx-auto max-w-3xl" data-pagefind-body>
       <slot />
     </main>
     <Footer />
