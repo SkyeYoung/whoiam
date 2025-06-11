@@ -1,5 +1,5 @@
 import { defineConfig, transformerVariantGroup, transformerDirectives } from 'unocss';
-import presetWind from '@unocss/preset-wind3';
+import presetWind from '@unocss/preset-wind4';
 import { presetTypography } from '@unocss/preset-typography';
 import { presetIcons } from '@unocss/preset-icons';
 import { presetAnimations } from 'unocss-preset-animations';

@@ -69,7 +69,7 @@
     "@unocss/astro": "^66.2.0",
     "@unocss/preset-icons": "^66.2.0",
     "@unocss/preset-typography": "^66.2.0",
-    "@unocss/preset-wind3": "^66.2.0",
+    "@unocss/preset-wind4": "^66.2.0",
     "@unocss/reset": "^66.2.0",
     "@unocss/transformer-directives": "^66.2.0",
     "@unocss/transformer-variant-group": "^66.2.0",

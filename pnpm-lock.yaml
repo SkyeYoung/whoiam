@@ -182,7 +182,7 @@ importers:
       '@unocss/preset-typography':
         specifier: ^66.2.0
         version: 66.2.0
-      '@unocss/preset-wind3':
+      '@unocss/preset-wind4':
         specifier: ^66.2.0
         version: 66.2.0
       '@unocss/reset':
