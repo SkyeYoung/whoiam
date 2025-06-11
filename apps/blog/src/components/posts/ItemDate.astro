@@ -4,15 +4,15 @@ import dayjs from 'dayjs';
 
 interface Props {
   post: BlogSchema;
+  className?: string;
 }
 
-const { post } = Astro.props;
+const { post, className } = Astro.props;
 ---
 
 <div
-  class="text-xs text-zinc-600 pl-0.5"
+  class:list={['text-xs text-zinc-600', className]}
   style={`view-transition-name: ${post.slug}-date`}
 >
   {dayjs(post.created_at).format('YYYY 年 MM 月 DD 日')}
 </div>
-

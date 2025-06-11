@@ -65,7 +65,7 @@ export function rehypeExternalLinks(options: RehypeExternalLinksOptions) {
               type: 'element',
               tagName: 'i',
               properties: {
-                class: `${className} text-[1rem] icon-[ri--earth-line]`,
+                class: `${className} text-[18px] icon-[ri--earth-line]`,
               },
               children: [],
             };
