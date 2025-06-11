@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import { siteConfig } from './src/configs/site';
 
-import tailwindcss from '@tailwindcss/vite';
+import UnoCSS from 'unocss/vite';
 import mdx from '@astrojs/mdx';
 import unpluginInfo from 'unplugin-info/astro';
 import unpluginIcons from 'unplugin-icons/vite';
@@ -67,7 +67,7 @@ export default defineConfig({
           },
         ],
       }),
-      tailwindcss(),
+      UnoCSS(),
       unpluginIcons({
         compiler: 'jsx',
         jsx: 'react',

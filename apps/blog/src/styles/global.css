@@ -1,7 +1,4 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/typography';
-@plugin '@midudev/tailwind-animations';
-@plugin "@iconify/tailwind4";
+@import '@unocss/reset/tailwind.css';
 
 @layer base {
   h1 {
