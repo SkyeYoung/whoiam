@@ -1,5 +1,4 @@
 ---
-import { siteConfig } from '@/configs/site';
 import now from '~build/time';
 ---
 
@@ -13,9 +12,16 @@ import now from '~build/time';
       </a>
       .
     </div>
-    <div class="flex gap-4">
-      <a class="a-normal text-sm" href="/sitemap-index.xml">Sitemap</a>
-      <a class="a-normal text-sm" href="/rss.xml">RSS</a>
+    <div class="flex gap-2">
+      <a
+        class="a-normal text-sm flex items-center gap-1"
+        href="/sitemap-index.xml"
+      >
+        Sitemap
+      </a>
+      <a class="a-normal text-sm flex items-center gap-1" href="/rss.xml">
+        RSS
+      </a>
     </div>
   </div>
 </footer>

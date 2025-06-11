@@ -64,7 +64,7 @@
 
 @layer components {
   .a-normal {
-    @apply text-zinc-800 dark:text-zinc-200 border-b border-zinc-800/25 dark:border-zinc-200/25 border-dashed hover:text-violet-800/80 dark:hover:text-violet-400/80 hover:border-violet-800/50 dark:hover:border-violet-400/50 transition-colors no-underline;
+    @apply text-zinc-800 dark:text-zinc-200 hover:text-violet-800/80 dark:hover:text-violet-400/80 transition-colors underline decoration-dashed decoration-zinc-800/25 dark:decoration-zinc-200/25 hover:decoration-violet-800/50 dark:hover:decoration-violet-400/50 underline-offset-2;
   }
 }
 
