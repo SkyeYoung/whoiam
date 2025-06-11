@@ -29,13 +29,15 @@ const info = [
 ];
 ---
 
-<div class="my-8 py-3 px-4 rounded-md ring-1 ring-zinc-800/25 backdrop-blur-sm">
-  <div class="text-xs text-zinc-500 space-y-1">
+<div
+  class="my-8 py-3 px-4 rounded-md ring-1 ring-zinc-800/25 dark:ring-zinc-200/25 backdrop-blur-sm bg-white/50 dark:bg-zinc-900/50"
+>
+  <div class="text-xs text-zinc-500 dark:text-zinc-400 space-y-1">
     {
       info.map((item) => (
         <div class="flex items-start">
-          <strong class="text-zinc-600">{item.key}</strong>：
-          <span class="text-zinc-800">
+          <strong class="text-zinc-600 dark:text-zinc-300">{item.key}</strong>：
+          <span class="text-zinc-800 dark:text-zinc-200">
             {item.value.startsWith('http') ? (
               <a href={item.value} class="a-normal">
                 {item.value}
@@ -48,9 +50,9 @@ const info = [
       ))
     }
   </div>
-  <hr class="my-2 text-zinc-200" />
+  <hr class="my-2 text-zinc-200 dark:text-zinc-700" />
 
-  <div class="text-sm text-zinc-600 leading-relaxed">
+  <div class="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
     转载或引用本文时请遵守
     <a
       href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"

@@ -138,7 +138,7 @@ export const Toc = (props: { headings: MarkdownHeading[] }) => {
   return (
     <section
       id="toc"
-      className="relative w-[300px] overflow-x-auto text-zinc-400"
+      className="relative w-[300px] overflow-x-auto text-zinc-600 dark:text-zinc-400"
       ref={tocRef}
     >
       <div className="flex items-center gap-1">
@@ -169,11 +169,12 @@ export const Toc = (props: { headings: MarkdownHeading[] }) => {
           key={heading.slug}
           href={`#${heading.slug}`}
           className={clsx(
-            `block ml-0 transition-all ease-in-out duration-300 text-sm my-2 hover:text-zinc-800`,
+            `block ml-0 transition-all ease-in-out duration-300 text-sm my-2 hover:text-zinc-800 dark:hover:text-zinc-200`,
             heading.depth === 2 && 'ml-2',
             heading.depth === 3 && 'ml-5',
             heading.depth > 3 && 'ml-8',
-            visibles.some((id) => id === heading.slug) && 'pl-4 text-zinc-800'
+            visibles.some((id) => id === heading.slug) &&
+              'pl-4 text-zinc-800 dark:text-zinc-200'
           )}
           onClick={(e) => {
             e.preventDefault();
