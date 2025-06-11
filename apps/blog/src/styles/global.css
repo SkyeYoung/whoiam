@@ -1,9 +1,5 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/typography';
-@plugin '@midudev/tailwind-animations';
-@plugin "@iconify/tailwind4";
-
-@custom-variant dark (&:where(.dark, .dark *));
+@import '@unocss/reset/tailwind.css';
+@unocss all;
 
 @layer base {
   html {
@@ -15,16 +11,16 @@
   }
 
   h1 {
-    @apply text-2xl;
+    --at-apply: text-2xl;
   }
   h2 {
-    @apply text-xl;
+    --at-apply: text-xl;
   }
   h3 {
-    @apply text-lg;
+    --at-apply: text-lg;
   }
   body {
-    @apply scroll-smooth overflow-y-scroll;
+    --at-apply: scroll-smooth overflow-y-scroll;
   }
 
   article {
@@ -37,9 +33,9 @@
     }
 
     span.icon-link {
-      @apply pl-1 absolute;
+      --at-apply: pl-1 absolute;
       &::after {
-        @apply transition-all content-[''] block h-[1em] w-0 bg-[currentColor];
+        --at-apply: transition-all content-[''] block h-[1em] w-0 bg-[currentColor];
 
         mask-repeat: no-repeat;
         mask-size: contain;
@@ -56,19 +52,13 @@
       scroll-margin-top: 20vh;
 
       &:hover {
-        @apply underline;
+        --at-apply: underline;
 
         span.icon-link::after {
-          @apply w-[1em];
+          --at-apply: w-[1em];
         }
       }
     }
-  }
-}
-
-@layer components {
-  .a-normal {
-    @apply text-zinc-800 dark:text-zinc-200 border-b border-zinc-800/25 dark:border-zinc-200/25 border-dashed hover:text-violet-800/80 dark:hover:text-violet-400/80 hover:border-violet-800/50 dark:hover:border-violet-400/50 transition-colors no-underline;
   }
 }
 

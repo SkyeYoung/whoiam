@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import { siteConfig } from './src/configs/site';
 
-import tailwindcss from '@tailwindcss/vite';
+import UnoCSS from '@unocss/astro';
 import mdx from '@astrojs/mdx';
 import unpluginInfo from 'unplugin-info/astro';
 import unpluginIcons from 'unplugin-icons/vite';
@@ -39,6 +39,7 @@ export default defineConfig({
     }),
     unpluginInfo(),
     pagefind(),
+    UnoCSS(),
   ],
 
   image: {
@@ -67,7 +68,6 @@ export default defineConfig({
           },
         ],
       }),
-      tailwindcss(),
       unpluginIcons({
         compiler: 'jsx',
         jsx: 'react',
