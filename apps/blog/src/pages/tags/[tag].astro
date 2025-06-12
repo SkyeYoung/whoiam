@@ -30,6 +30,15 @@ const { posts, tag } = Astro.props;
     </span>
   </Heading>
   <List>
-    {posts.map((post) => <ListItem post={post.data} />)}
+    {
+      posts.map((post, i) => (
+        <li
+          class="animate-fade-in-up animate-duration-300 opacity-0 animate-fill-mode-forwards"
+          style={{ animationDelay: `${i * 100}ms` }}
+        >
+          <ListItem post={post.data} />
+        </li>
+      ))
+    }
   </List>
 </BaseLayout>

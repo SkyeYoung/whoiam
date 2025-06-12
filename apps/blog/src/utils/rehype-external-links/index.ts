@@ -110,7 +110,7 @@ export function rehypeExternalLinks(options: RehypeExternalLinksOptions) {
           type: 'element',
           tagName: 'span',
           properties: {
-            class: 'external-link-wrapper inline mx-1',
+            class: 'external-link-wrapper inline mx-1 cursor-follow-wrapper',
           },
           children,
         };
@@ -120,6 +120,8 @@ export function rehypeExternalLinks(options: RehypeExternalLinksOptions) {
     );
 
     await Promise.all(promises);
+
+    return tree;
   };
 }
 

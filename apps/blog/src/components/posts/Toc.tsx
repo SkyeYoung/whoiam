@@ -154,7 +154,7 @@ export const Toc = (props: { headings: MarkdownHeading[] }) => {
       >
         <path
           ref={pathRef}
-          className="transition-all ease-in-out duration-300 text-violet-400"
+          className="transition-all ease-in-out duration-300 text-theme-light"
           strokeLinejoin="round"
           strokeLinecap="round"
           strokeDashoffset="100%"
