@@ -13,7 +13,6 @@ type GetBlogCollectionOpt = Partial<
 >;
 export const getBlogCollection = async (opt?: GetBlogCollectionOpt) => {
   const { draft = false, categories, tags } = opt || {};
-  console.log(draft, categories, tags);
   const posts = await getCollection('blog', ({ data }) => {
     if (draft !== undefined && draft !== data.draft) {
       return false;
