@@ -25,7 +25,7 @@ const { posts, tag } = Astro.props;
 <BaseLayout title={`标签: ${tag}`}>
   <Heading>
     <span class="flex">
-      <HashTagIcon style={{ viewTransitionName: 'hash-tag-icon' }} />
+      <HashTagIcon transition:name="hash-tag-icon" />
       <span transition:name={`tag-${tag}`}>{tag}</span>
     </span>
   </Heading>
@@ -33,7 +33,7 @@ const { posts, tag } = Astro.props;
     {
       posts.map((post, i) => (
         <li
-          class="animate-fade-in-up animate-duration-300 opacity-0 animate-fill-mode-forwards"
+          class="animate-slide-in-bottom animate-duration-300"
           style={{ animationDelay: `${i * 100}ms` }}
         >
           <ListItem post={post.data} />

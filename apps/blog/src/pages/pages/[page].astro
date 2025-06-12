@@ -21,7 +21,7 @@ const { page } = Astro.props;
     {
       page.data.map((post, i) => (
         <li
-          class="animate-fade-in-left animate-duration-300 opacity-0 animate-fill-mode-forwards"
+          class="animate-slide-in-right animate-duration-300 "
           style={{ animationDelay: `${i * 100}ms` }}
         >
           <ListItem post={post.data} />

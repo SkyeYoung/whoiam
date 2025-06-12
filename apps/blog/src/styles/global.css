@@ -70,7 +70,7 @@
 
 @layer components {
   .a-normal {
-    @apply text-zinc-800 dark:text-zinc-200 hover:text-theme-primary dark:hover:text-theme-light transition-all duration-300 underline decoration-dashed decoration-zinc-800/25 dark:decoration-zinc-200/25 hover:decoration-theme-primary/50 dark:hover:decoration-theme-light/50 underline-offset-2 rounded-sm;
+    @apply text-zinc-800 dark:text-zinc-200 hover:text-theme-primary dark:hover:text-theme-light duration-300 underline decoration-dashed decoration-zinc-800/25 dark:decoration-zinc-200/25 hover:decoration-theme-primary/50 dark:hover:decoration-theme-light/50 underline-offset-2 rounded-sm;
   }
 }
 
