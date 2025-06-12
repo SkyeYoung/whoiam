@@ -1,15 +1,14 @@
 ---
-title: test1
-slug: test
-description: test
+title: 测试 MD 样式
+slug: test-md-style
+description: test markdown style
 draft: false
 tags:
   - test
-  - react
   - astro
 categories: []
 created_at: 2025-05-31T16:51:28.232Z
-updated_at: 2025-06-08T17:05:08.068Z
+updated_at: 2025-06-12T12:44:18.067Z
 fmContentType: blog
 ---
 
