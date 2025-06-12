@@ -5,6 +5,8 @@ import ThemeScript from '@/components/layouts/ThemeScript.astro';
 import { siteConfig } from '@/configs/site';
 import clsx from 'clsx';
 import { ClientRouter } from 'astro:transitions';
+import Analytics from '@vercel/analytics/astro';
+
 import '@/styles/global.css';
 
 interface Props {
@@ -46,5 +48,6 @@ const title = pageTitle
       <slot />
     </main>
     <Footer />
+    <Analytics />
   </body>
 </html>
