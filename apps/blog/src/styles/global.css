@@ -63,9 +63,9 @@
 }
 
 @theme {
-  --color-theme-primary: #7c3aed;
-  --color-theme-light: #a855f7;
-  --color-theme-dark: #c084fc;
+  --color-theme-primary: #A892C0;
+  --color-theme-light: #E8E3F0;
+  --color-theme-dark: #3A3246;
 }
 
 @layer components {
