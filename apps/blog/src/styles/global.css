@@ -72,29 +72,10 @@
   .a-normal {
     @apply text-zinc-800 dark:text-zinc-200 hover:text-theme-primary dark:hover:text-theme-light transition-all duration-300 underline decoration-dashed decoration-zinc-800/25 dark:decoration-zinc-200/25 hover:decoration-theme-primary/50 dark:hover:decoration-theme-light/50 underline-offset-2 rounded-sm;
   }
-
-  /* External link wrapper with custom cursor behavior */
-  .cursor-follow-wrapper {
-    @apply relative;
-    cursor: none; /* Hide default cursor when hovering over external links */
-  }
-
-  /* Ensure the external link has proper cursor behavior */
-  .cursor-follow-wrapper a {
-    cursor: none;
-  }
-
-  /* Show default cursor on non-hover devices */
-  @media (hover: none) {
-    .cursor-follow-wrapper,
-    .cursor-follow-wrapper a {
-      cursor: pointer !important;
-    }
-  }
 }
 
 @layer utilities {
-  .no-transition  {
+  .no-transition {
     *:not(header *),
     *:not(header *)::before,
     *:not(header *)::after {

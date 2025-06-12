@@ -22,7 +22,7 @@ export const getStaticPaths = (async () => {
 const { posts, tag } = Astro.props;
 ---
 
-<BaseLayout title={tag}>
+<BaseLayout title={`标签: ${tag}`}>
   <Heading>
     <span class="flex">
       <HashTagIcon style={{ viewTransitionName: 'hash-tag-icon' }} />
