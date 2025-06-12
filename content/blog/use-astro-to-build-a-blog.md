@@ -2,12 +2,12 @@
 title: 使用 Astro 构建博客
 slug: use-astro-to-build-a-blog
 description: Astro 很好，但还不够好
-draft: false
+draft: true
 tags:
   - astro
 categories: []
 created_at: 2025-05-31T16:51:28.232Z
-updated_at: 2025-06-10T16:27:23.419Z
+updated_at: 2025-06-12T15:08:34.800Z
 fmContentType: blog
 ---
 
