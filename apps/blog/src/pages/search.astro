@@ -9,6 +9,16 @@ import SearchInput from 'astro-pagefind/components/Search';
   <SearchInput
     id="search"
     className="pagefind-ui min-w-3xl"
-    uiOptions={{ showImages: false }}
+    uiOptions={{ showImages: false, autofocus: true }}
   />
 </BaseLayout>
+
+<style>
+  :root.dark {
+    --pagefind-ui-primary: #c084fc;
+    --pagefind-ui-text: #e4e4e7;
+    --pagefind-ui-background: #18181b;
+    --pagefind-ui-border: #27272a;
+    --pagefind-ui-tag: #27272a;
+  }
+</style>
