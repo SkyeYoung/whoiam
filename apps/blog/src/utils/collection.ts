@@ -11,21 +11,23 @@ const sortByCreatedAt = (a: BlogCollection, b: BlogCollection) => {
 type GetBlogCollectionOpt = Partial<
   Pick<BlogCollection['data'], 'categories' | 'tags' | 'draft'>
 >;
-export const getBlogCollection = async (
-  opt: GetBlogCollectionOpt = { draft: false }
-) => {
+export const getBlogCollection = async (opt?: GetBlogCollectionOpt) => {
+  const { draft = false, categories, tags } = opt || {};
+  console.log(draft, categories, tags);
   const posts = await getCollection('blog', ({ data }) => {
-    let hasThis = true;
-    if (opt.draft !== undefined) {
-      hasThis = opt.draft === data.draft;
+    if (draft !== undefined && draft !== data.draft) {
+      return false;
     }
-    if (opt.categories?.length) {
-      hasThis = opt.categories.some((c) => data.categories.includes(c));
+    if (
+      categories?.length &&
+      !categories.some((c) => data.categories.includes(c))
+    ) {
+      return false;
     }
-    if (opt.tags?.length) {
-      hasThis = opt.tags.some((t) => data.tags.includes(t));
+    if (tags?.length && !tags.some((t) => data.tags.includes(t))) {
+      return false;
     }
-    return hasThis;
+    return true;
   });
   return posts.toSorted(sortByCreatedAt);
 };
