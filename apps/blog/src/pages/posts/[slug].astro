@@ -35,7 +35,8 @@ const { headings, Content } = await render(post);
       <article class="px-2 min-w-3xl">
         <ArticleHeader post={post} />
         <section
-          class="heti prose dark:prose-invert prose-h1:font-bold prose-h1:text-xl prose-a:no-underline prose-a:border-b prose-a:border-zinc-800/25 dark:prose-a:border-zinc-200/25 prose-a:border-dashed prose-a:hover:text-theme-primary dark:prose-a:hover:text-theme-light prose-a:transition-all prose-a:duration-300 prose-a:px-1 prose-a:py-0.5 prose-a:rounded-sm prose-a:hover:bg-theme-primary/6 dark:prose-a:hover:bg-theme-light/6 prose-a:hover:shadow-sm prose-a:hover:shadow-theme-primary/15 dark:prose-a:hover:shadow-theme-light/15 prose-p:text-justify prose-pre:rounded-md prose-pre:border prose-pre:border-zinc-800/25 dark:prose-pre:border-zinc-200/25 prose-pre:bg-zinc-900/5 dark:prose-pre:bg-zinc-100/5"
+          class="heti prose dark:prose-invert prose-h1:font-bold prose-h1:text-xl
+          prose-a:text-zinc-800 dark:prose-a:text-zinc-200 prose-a:hover:text-theme-primary dark:prose-a:hover:text-theme-light prose-a:transition-all prose-a:duration-300 prose-a:rounded-sm prose-a:underline prose-a:decoration-dashed prose-a:decoration-zinc-800/25 dark:prose-a:decoration-zinc-200/25 prose-a:hover:decoration-theme-primary/50 dark:prose-a:hover:decoration-theme-light/50 prose-a:underline-offset-2 prose-p:text-justify prose-pre:rounded-md prose-pre:border prose-pre:border-zinc-800/25 dark:prose-pre:border-zinc-200/25 prose-pre:bg-zinc-900/5 dark:prose-pre:bg-zinc-100/5"
         >
           <Content />
         </section>
