@@ -1,0 +1,119 @@
+---
+import { SEO } from 'astro-seo';
+import { Schema } from 'astro-seo-schema';
+import { siteConfig } from '@/configs/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+    tags?: string[];
+  };
+  noindex?: boolean;
+}
+
+const {
+  title: pageTitle,
+  description: pageDescription,
+  image,
+  article,
+  noindex = false,
+} = Astro.props;
+
+const title = pageTitle
+  ? `${pageTitle} | ${siteConfig.title}`
+  : siteConfig.title;
+
+const description = pageDescription || siteConfig.description;
+
+// Build Open Graph image URL
+const ogImage = image
+  ? new URL(image, siteConfig.site).href
+  : new URL(siteConfig.defaultImage || '/og-image.svg', siteConfig.site).href;
+
+// Build canonical URL
+const canonicalURL = new URL(Astro.url.pathname, siteConfig.site).href;
+---
+
+<SEO
+  title={title}
+  description={description}
+  canonical={canonicalURL}
+  noindex={noindex}
+  openGraph={{
+    basic: {
+      title: title,
+      type: article ? 'article' : 'website',
+      image: ogImage,
+      url: canonicalURL,
+    },
+    optional: {
+      description: description,
+      siteName: siteConfig.title,
+      locale: 'zh_CN',
+    },
+    ...(article && {
+      article: {
+        publishedTime: article.publishedTime,
+        modifiedTime: article.modifiedTime,
+        authors: article.author ? [article.author] : [siteConfig.author],
+        tags: article.tags || [],
+      },
+    }),
+  }}
+  twitter={{
+    card: 'summary_large_image',
+  }}
+/>
+
+{
+  !article && (
+    <Schema
+      item={{
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: siteConfig.title,
+        url: siteConfig.site,
+        description: siteConfig.description,
+        author: {
+          '@type': 'Person',
+          name: siteConfig.author,
+        },
+      }}
+    />
+  )
+}
+
+{
+  article && (
+    <Schema
+      item={{
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: pageTitle,
+        description: description,
+        image: ogImage,
+        url: canonicalURL,
+        author: {
+          '@type': 'Person',
+          name: article.author || siteConfig.author,
+        },
+        publisher: {
+          '@type': 'Person',
+          name: siteConfig.author,
+        },
+        datePublished: article.publishedTime,
+        dateModified: article.modifiedTime,
+        keywords: article.tags?.join(', '),
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': canonicalURL,
+        },
+      }}
+    />
+  )
+}

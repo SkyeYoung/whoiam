@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import { getBlogCollection } from '../../utils/collection';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { siteConfig } from '@/configs/site';
 import { Comments } from '@/components/posts/Comments';
 import { Toc } from '@/components/posts/Toc';
 import { BackToTop } from '@/components/posts/BackToTop';
@@ -27,7 +28,17 @@ const { post } = Astro.props;
 const { headings, Content } = await render(post);
 ---
 
-<BaseLayout title={post.data.title}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.cover}
+  article={{
+    publishedTime: post.data.created_at.toISOString(),
+    modifiedTime: post.data.updated_at.toISOString(),
+    author: siteConfig.author,
+    tags: post.data.tags,
+  }}
+>
   <div class="flex flex-row relative mt-[80px]">
     <div>
       <article class="px-2 min-w-3xl">

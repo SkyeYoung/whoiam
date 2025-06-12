@@ -7,6 +7,13 @@ const schema = z.object({
   title: z.string(),
   description: z.string().default(''),
   author: z.string().default(''),
+  defaultImage: z.string().optional(),
+  socialMedia: z
+    .object({
+      github: z.string().optional(),
+    })
+    .optional(),
+  keywords: z.array(z.string()).optional(),
 });
 
 export const siteConfig = await loadConfig({

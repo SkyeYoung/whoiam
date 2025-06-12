@@ -2,27 +2,43 @@
 import Footer from '@/components/layouts/Footer.astro';
 import Header from '@/components/layouts/Header.astro';
 import ThemeScript from '@/components/layouts/ThemeScript.astro';
-import { siteConfig } from '@/configs/site';
+
 import clsx from 'clsx';
 import { ClientRouter } from 'astro:transitions';
 import Analytics from '@vercel/analytics/astro';
+import SEOHead from '@/components/layouts/SEOHead.astro';
 
 import '@/styles/global.css';
+import { siteConfig } from '@/configs/site';
 
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
   className?: string;
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+    tags?: string[];
+  };
+  noindex?: boolean;
 }
-const { title: pageTitle, className } = Astro.props;
-const title = pageTitle
-  ? `${pageTitle} | ${siteConfig.title}`
-  : siteConfig.title;
+
+const {
+  title,
+  description,
+  image,
+  className,
+  article,
+  noindex = false,
+} = Astro.props;
 ---
 
 <html lang="zh-Hans">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={siteConfig.description} />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -33,7 +49,13 @@ const title = pageTitle
       title={siteConfig.title}
       href={new URL('rss.xml', siteConfig.site)}
     />
-    <title>{title}</title>
+    <SEOHead
+      title={title}
+      description={description}
+      image={image}
+      article={article}
+      noindex={noindex}
+    />
     <ThemeScript />
     <ClientRouter />
   </head>

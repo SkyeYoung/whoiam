@@ -12,9 +12,13 @@ export const getStaticPaths = (async ({ paginate }) => {
   return paginate(posts, { pageSize: 6 });
 }) satisfies GetStaticPaths;
 const { page } = Astro.props;
+
+// Generate SEO data for pagination
+const isFirstPage = page.currentPage === 1;
+const pageTitle = isFirstPage ? undefined : `第 ${page.currentPage} 页`;
 ---
 
-<BaseLayout>
+<BaseLayout title={pageTitle}>
   {page.currentPage === 1 && <Heading>近期文章</Heading>}
 
   <List>

@@ -1,5 +1,12 @@
 # yaml-language-server: $schema=apps/blog/node_modules/.local/blog.schema.json
 site: https://blog.syis.me
 title: Young's Blog
-description: "Young's Blog"
+description: "Young's personal blog about technology, programming, and life insights"
 author: Young
+defaultImage: "/og-image.svg"
+socialMedia:
+  github: "https://github.com/SkyeYoung"
+keywords: 
+  - "Frontend" 
+  - "TypeScript"
+  - "Web"
