@@ -14,6 +14,7 @@ const schema = z.object({
     })
     .optional(),
   keywords: z.array(z.string()).optional(),
+  contentDir: z.string().describe("Based on the project's root directory"),
 });
 
 export const siteConfig = await loadConfig({

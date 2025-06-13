@@ -16,6 +16,7 @@ import path from 'path';
 import createSymlink from './vite-plugin-create-symlink';
 
 const curDir = import.meta.dirname;
+const rootDir = path.resolve(curDir, '../../');
 
 // https://astro.build/config
 export default defineConfig({
@@ -54,15 +55,15 @@ export default defineConfig({
     define: {
       __PROJECT__: {
         dir: curDir,
-        root: path.resolve(curDir, '../..'),
-        content: path.resolve(curDir, '../../content'),
+        root: rootDir,
+        content: path.resolve(rootDir, siteConfig.contentDir),
       },
     },
     plugins: [
       createSymlink({
         links: [
           {
-            source: path.resolve(curDir, '../../content'),
+            source: path.resolve(rootDir, siteConfig.contentDir),
             target: path.resolve(curDir, './src/content'),
           },
         ],
