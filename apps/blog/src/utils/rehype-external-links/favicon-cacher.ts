@@ -1,7 +1,38 @@
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, mkdir, copyFile, readdir, cp } from 'fs/promises';
 import { join } from 'path';
 import { fileExists } from '../common';
 import { trimWhiteBorderFromBuffer } from './trim-white-border';
+
+export const DEFAULT_CACHE_DIR = './public/favicons';
+export const DEFAULT_PERSISTENT_DIR = './node_modules/.local/favicons';
+
+const cpOpts = {
+  recursive: true,
+  errorOnExist: true,
+  force: false,
+};
+
+/**
+ * Restore cache from persistent storage to working directory
+ */
+export async function restoreCache(
+  cacheDir: string = DEFAULT_CACHE_DIR,
+  persistentDir: string = DEFAULT_PERSISTENT_DIR
+) {
+  if (!(await fileExists(persistentDir))) return;
+  await cp(persistentDir, cacheDir, cpOpts);
+}
+
+/**
+ * Backup cache from working directory to persistent storage
+ */
+export async function backupCache(
+  cacheDir: string = DEFAULT_CACHE_DIR,
+  persistentDir: string = DEFAULT_PERSISTENT_DIR
+) {
+  if (!(await fileExists(cacheDir))) return;
+  await cp(cacheDir, persistentDir, cpOpts);
+}
 
 function extractDomain(url: string) {
   try {
@@ -82,7 +113,7 @@ type FaviconCacherOptions = {
 };
 
 /**
- * Creates a favicon cacher
+ * Creates a favicon cacher with persistent cache support
  */
 export async function createFaviconCacher(opts: FaviconCacherOptions = {}) {
   const {
@@ -91,6 +122,9 @@ export async function createFaviconCacher(opts: FaviconCacherOptions = {}) {
     getFavicon = getFaviconDefault,
     fallback = 'none.ico',
   } = opts;
+
+  // Restore cache from persistent storage first
+  await restoreCache(cacheDir);
 
   // Create cache directory
   if (!(await fileExists(cacheDir))) {
@@ -127,6 +161,9 @@ export async function createFaviconCacher(opts: FaviconCacherOptions = {}) {
       // Save to cache
       await writeFile(filePath, new Uint8Array(buf));
       console.log(`✅ Cached favicon for ${url}`);
+
+      // Backup to persistent cache
+      await backupCache(cacheDir);
 
       return toLink(filename);
     } catch (error) {
