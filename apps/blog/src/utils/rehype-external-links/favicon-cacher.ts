@@ -8,8 +8,8 @@ export const DEFAULT_PERSISTENT_DIR = './node_modules/.local/favicons';
 
 const cpOpts = {
   recursive: true,
-  errorOnExist: true,
-  force: false,
+  errorOnExist: false,
+  force: true,
 };
 
 /**
