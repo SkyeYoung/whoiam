@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getBlogCollection, getBlogTagsCount } from '@/utils/collection';
-import List from '@/components/posts/List.astro';
 import ListItem from '@/components/posts/ListItem.astro';
 import type { GetStaticPaths } from 'astro';
 import Heading from '@/components/layouts/Heading.astro';
@@ -29,7 +28,7 @@ const { posts, tag } = Astro.props;
       <span transition:name={`tag-${tag}`}>{tag}</span>
     </span>
   </Heading>
-  <List>
+  <ul>
     {
       posts.map((post, i) => (
         <li
@@ -40,5 +39,5 @@ const { posts, tag } = Astro.props;
         </li>
       ))
     }
-  </List>
+  </ul>
 </BaseLayout>

@@ -138,7 +138,7 @@ export const Toc = (props: { headings: MarkdownHeading[] }) => {
   return (
     <section
       id="toc"
-      className="relative w-[300px] overflow-x-auto text-zinc-600 dark:text-zinc-400"
+      className="relative w-[300px] overflow-x-auto text-zinc-600 dark:text-zinc-400 hidden md:block"
       ref={tocRef}
     >
       <div className="flex items-center gap-1">

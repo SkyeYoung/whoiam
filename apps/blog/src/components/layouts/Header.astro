@@ -20,33 +20,149 @@ const links = [
 ---
 
 <header class="w-full">
-  <div class="max-w-3xl mx-auto py-4 flex items-center justify-between">
-    <div class="flex items-center">
-      <a
-        href="/"
-        class="text-xl text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 transition-colors"
-        aria-label={siteConfig.title}
-      >
-        <Logo width={140} height={40} />
-      </a>
+  <div class="max-w-3xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a
+          href="/"
+          class="text-xl text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 transition-colors"
+          aria-label={siteConfig.title}
+        >
+          <Logo width={120} height={32} class="sm:w-[140px] sm:h-[40px]" />
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-4">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors',
+                Astro.url.pathname.includes(link.href) &&
+                  'text-gray-900 dark:text-gray-100',
+              ]}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <ThemeToggle />
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center space-x-2">
+        <ThemeToggle />
+        <button
+          type="button"
+          class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-theme-primary transition-colors"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <!-- Hamburger icon -->
+          <svg
+            class="block h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+          </svg>
+          <!-- Close icon -->
+          <svg
+            class="hidden h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <nav class="md:flex items-center space-x-4">
-      {
-        links.map((link) => (
-          <a
-            href={link.href}
-            class:list={[
-              'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors',
-              Astro.url.pathname.includes(link.href) &&
-                'text-gray-900 dark:text-gray-100',
-            ]}
-          >
-            {link.label}
-          </a>
-        ))
-      }
-      <ThemeToggle />
-    </nav>
+    <div class="mobile-menu hidden md:hidden">
+      <div
+        class="z-50 absolute top-12 left-0 w-full px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 dark:border-gray-700 mt-4 bg-white dark:bg-zinc-900"
+      >
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'block px-3 py-2 rounded-md text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors',
+                Astro.url.pathname.includes(link.href) &&
+                  'text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-800',
+              ]}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </header>
+
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('astro:page-load', () => {
+    const button = document.querySelector('.mobile-menu-button');
+    const menu = document.querySelector('.mobile-menu');
+    const hamburgerIcon = button?.querySelector('svg:first-of-type');
+    const closeIcon = button?.querySelector('svg:last-of-type');
+
+    if (!button || !menu || !hamburgerIcon || !closeIcon) return;
+
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Toggle menu visibility
+      menu.classList.toggle('hidden');
+
+      // Toggle button state
+      button.setAttribute('aria-expanded', (!isExpanded).toString());
+
+      // Toggle icons
+      hamburgerIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (
+        !button.contains(e.target as Node) &&
+        !menu.contains(e.target as Node)
+      ) {
+        menu.classList.add('hidden');
+        button.setAttribute('aria-expanded', 'false');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      }
+    });
+
+    // Close menu when resizing to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        // md breakpoint
+        menu.classList.add('hidden');
+        button.setAttribute('aria-expanded', 'false');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      }
+    });
+  });
+</script>

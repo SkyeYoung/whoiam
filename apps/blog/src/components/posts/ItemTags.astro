@@ -16,11 +16,10 @@ const { post } = Astro.props;
     post.tags.map((tag) => (
       <a
         href={`/tags/${tag}`}
-        class="px-2 py-1 text-xs text-zinc-600 bg-zinc-100 rounded-md hover:bg-zinc-200 transition-colors duration-200 no-underline"
+        class="px-3 py-1.5 text-xs text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-700 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-600 transition-colors duration-200 no-underline break-words hyphens-auto flex-shrink-0"
       >
         {tag}
       </a>
     ))
   }
 </div>
-

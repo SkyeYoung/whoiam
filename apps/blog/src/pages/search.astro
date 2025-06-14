@@ -6,11 +6,13 @@ import SearchInput from 'astro-pagefind/components/Search';
 
 <BaseLayout title="搜索">
   <Heading />
-  <SearchInput
-    id="search"
-    className="pagefind-ui min-w-3xl"
-    uiOptions={{ showImages: false, autofocus: true }}
-  />
+  <div class="w-full">
+    <SearchInput
+      id="search"
+      className="pagefind-ui w-full"
+      uiOptions={{ showImages: false, autofocus: true }}
+    />
+  </div>
 </BaseLayout>
 
 <style>

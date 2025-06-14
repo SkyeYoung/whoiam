@@ -39,32 +39,32 @@ const { headings, Content } = await render(post);
     tags: post.data.tags,
   }}
 >
-  <div class="flex flex-row relative mt-[80px]">
-    <div>
-      <article class="px-2 min-w-3xl">
-        <ArticleHeader post={post} />
-        <section
-          class="heti prose dark:prose-invert prose-h1:font-bold prose-h1:text-xl
+  <div class="relative lg:mt-[80px]">
+    <article class="px-2">
+      <ArticleHeader post={post} />
+      <section
+        class="heti prose max-w-[100%] dark:prose-invert prose-h1:font-bold prose-h1:text-xl
           prose-a:text-zinc-800 dark:prose-a:text-zinc-200 prose-a:hover:text-theme-primary dark:prose-a:hover:text-theme-light prose-a:transition-all prose-a:duration-300 prose-a:rounded-sm prose-a:underline prose-a:decoration-dashed prose-a:decoration-zinc-800/25 dark:prose-a:decoration-zinc-200/25 prose-a:hover:decoration-theme-primary/50 dark:prose-a:hover:decoration-theme-light/50 prose-a:underline-offset-2 prose-p:text-justify prose-pre:rounded-md prose-pre:border prose-pre:border-zinc-800/25 dark:prose-pre:border-zinc-200/25 prose-pre:bg-zinc-900/5 dark:prose-pre:bg-zinc-100/5"
-        >
-          <Content />
-        </section>
+      >
+        <Content />
+      </section>
 
-        <div class="my-20"></div>
-        <License post={post.data} />
-      </article>
-      <div class="my-10 border-t-1 border-zinc-800/5 dark:border-zinc-200/5">
-      </div>
-      <Comments client:visible />
+      <div class="my-20"></div>
+      <License post={post.data} />
+    </article>
+    <div class="my-10 border-t-1 border-zinc-800/5 dark:border-zinc-200/5">
     </div>
-    <aside class="ml-10 sticky h-0 top-[10%]">
-      <div class="backdrop-blur-md shadow-zinc-800/5 rounded-md">
-        <Toc headings={headings} client:idle />
-        <BackToTop client:idle />
-      </div>
-    </aside>
+    <Comments client:visible />
   </div>
   {post.body?.includes('![') && <ImageLightboxViewer client:idle />}
   <HetiScript />
   <MermaidScript />
+
+  <div
+    slot="aside"
+    class="mt-[80px] sticky top-[10%] backdrop-blur-md shadow-zinc-800/5 rounded-md"
+  >
+    <Toc headings={headings} client:idle />
+    <BackToTop client:idle />
+  </div>
 </BaseLayout>
