@@ -3,6 +3,9 @@ import { siteConfig } from '@/configs/site';
 import Logo from '@/assets/logo.svg';
 import ThemeToggle from './ThemeToggle.astro';
 
+import RiMenuFill from '~icons/ri/menu-fill';
+import RiCloseFill from '~icons/ri/close-fill';
+
 const links = [
   {
     label: '标签',
@@ -22,7 +25,6 @@ const links = [
 <header class="w-full">
   <div class="max-w-3xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between">
-      <!-- Logo -->
       <div class="flex items-center">
         <a
           href="/"
@@ -33,68 +35,39 @@ const links = [
         </a>
       </div>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-4">
-        {
-          links.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors',
-                Astro.url.pathname.includes(link.href) &&
-                  'text-gray-900 dark:text-gray-100',
-              ]}
-            >
-              {link.label}
-            </a>
-          ))
-        }
+      <nav class="flex items-center space-x-2">
+        <div class="hidden md:flex items-center space-x-4">
+          {
+            links.map((link) => (
+              <a
+                href={link.href}
+                class:list={[
+                  'text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors',
+                  Astro.url.pathname.includes(link.href) &&
+                    'text-gray-900 dark:text-gray-100',
+                ]}
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
         <ThemeToggle />
-      </nav>
 
-      <!-- Mobile Menu Button -->
-      <div class="md:hidden flex items-center space-x-2">
-        <ThemeToggle />
         <button
           type="button"
-          class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-theme-primary transition-colors"
+          id="mobile-menu-btn"
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-theme-primary transition-colors"
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
-          <span class="sr-only">Open main menu</span>
-          <!-- Hamburger icon -->
-          <svg
-            class="block h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-          </svg>
-          <!-- Close icon -->
-          <svg
-            class="hidden h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+          <RiMenuFill id="menu-icon" />
+          <RiCloseFill id="close-icon" className="hidden" />
         </button>
-      </div>
+      </nav>
     </div>
 
-    <div class="mobile-menu hidden md:hidden">
+    <div id="mobile-menu" class="hidden">
       <div
         class="z-50 absolute top-12 left-0 w-full px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 dark:border-gray-700 mt-4 bg-white dark:bg-zinc-900"
       >
@@ -120,48 +93,38 @@ const links = [
 <script>
   // Mobile menu toggle functionality
   document.addEventListener('astro:page-load', () => {
-    const button = document.querySelector('.mobile-menu-button');
-    const menu = document.querySelector('.mobile-menu');
-    const hamburgerIcon = button?.querySelector('svg:first-of-type');
-    const closeIcon = button?.querySelector('svg:last-of-type');
+    const btn = document.querySelector('#mobile-menu-btn');
+    const menuIcon = btn?.querySelector('#menu-icon');
+    const closeIcon = btn?.querySelector('#close-icon');
+    const menu = document.querySelector('#mobile-menu');
 
-    if (!button || !menu || !hamburgerIcon || !closeIcon) return;
+    if (!btn || !menu || !menuIcon || !closeIcon) return;
 
-    button.addEventListener('click', () => {
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    const setMenuStat = (open: boolean) => {
+      const act = (v: boolean) => (v ? 'add' : 'remove');
+      menu.classList[act(!open)]('hidden');
+      menuIcon.classList[act(open)]('hidden');
+      closeIcon.classList[act(!open)]('hidden');
+      btn.setAttribute('aria-expanded', open.toString());
+    };
 
-      // Toggle menu visibility
-      menu.classList.toggle('hidden');
-
-      // Toggle button state
-      button.setAttribute('aria-expanded', (!isExpanded).toString());
-
-      // Toggle icons
-      hamburgerIcon.classList.toggle('hidden');
-      closeIcon.classList.toggle('hidden');
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      console.log('isExpanded', expanded);
+      setMenuStat(!expanded);
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-      if (
-        !button.contains(e.target as Node) &&
-        !menu.contains(e.target as Node)
-      ) {
-        menu.classList.add('hidden');
-        button.setAttribute('aria-expanded', 'false');
-        hamburgerIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
+      if (!btn.contains(e.target as Node) && !menu.contains(e.target as Node)) {
+        setMenuStat(false);
       }
     });
 
     // Close menu when resizing to desktop
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 768) {
-        // md breakpoint
-        menu.classList.add('hidden');
-        button.setAttribute('aria-expanded', 'false');
-        hamburgerIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
+        setMenuStat(false);
       }
     });
   });
