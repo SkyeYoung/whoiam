@@ -28,7 +28,7 @@ const { posts, tag } = Astro.props;
       <span transition:name={`tag-${tag}`}>{tag}</span>
     </span>
   </Heading>
-  <ul>
+  <ul class="space-y-5">
     {
       posts.map((post, i) => (
         <li

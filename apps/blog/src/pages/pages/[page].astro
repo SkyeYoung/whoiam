@@ -20,7 +20,7 @@ const pageTitle = isFirstPage ? undefined : `第 ${page.currentPage} 页`;
 <BaseLayout title={pageTitle}>
   {page.currentPage === 1 && <Heading>近期文章</Heading>}
 
-  <ul>
+  <ul class="space-y-5">
     {
       page.data.map((post, i) => (
         <li
