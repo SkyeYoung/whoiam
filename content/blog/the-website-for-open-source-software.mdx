@@ -3,7 +3,7 @@ title: 维护开源软件的网站
 slug: the-website-for-open-source-software
 description: placeholder
 created_at: 2025-06-25T15:54:48.937Z
-updated_at: 2025-06-27T14:58:08.489Z
+updated_at: 2025-06-27T16:33:09.671Z
 draft: false
 tags:
   - opensource
@@ -134,7 +134,7 @@ Hugo 的好处是可以在不怎么修改网站框架的情况下，实现很多
 以 [APISIX Website](https://github.com/apache/apisix-website) 为例，更好的做法是：
 
 - 将 blog、docs 和其他页面的 **代码部分** 分别拆到 `apps/` 的各自文件夹中。
-- 将 blog 和 docs 的**MD 文件** 拆到 `content/` 的各自文件夹中。（这里的 docs 是指剩余的独立文档，不包括子项目中的文档。）
+- 将 blog 和 docs 的 **内容部分** 拆到 `content/` 的各自文件夹中。（这里的 docs 是指剩余的独立文档，不包括子项目中的文档。）
 - 对于共用的组件（header、footer）等，拆到 `pkgs/` 的 `components` 文件夹中。
 
 最后看起来像这样：
