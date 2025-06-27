@@ -24,7 +24,7 @@ const pageTitle = isFirstPage ? undefined : `第 ${page.currentPage} 页`;
     {
       page.data.map((post, i) => (
         <li
-          class="animate-slide-in-right animate-duration-300 animate-bezier-sine-in-out"
+          class="animate-slide-in-bottom lg:animate-slide-in-right animate-duration-300 animate-bezier-sine-in-out"
           style={{ animationDelay: `${i * 100}ms` }}
         >
           <ListItem post={post.data} />
