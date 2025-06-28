@@ -14,6 +14,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { rehypePlugins, remarkPlugins, shikiConfig } from './src/configs/md';
 import path from 'path';
 import createSymlink from './vite-plugin-create-symlink';
+import type { PluginOption } from 'vite';
 
 const curDir = import.meta.dirname;
 const rootDir = path.resolve(curDir, '../../');
@@ -43,11 +44,11 @@ export default defineConfig({
   ],
 
   image: {
-    experimentalLayout: 'full-width',
+    responsiveStyles: true,
+    layout: 'full-width',
   },
 
   experimental: {
-    responsiveImages: true,
     contentIntellisense: true,
   },
 
@@ -68,7 +69,7 @@ export default defineConfig({
           },
         ],
       }),
-      tailwindcss(),
+      tailwindcss() as PluginOption,
       unpluginIcons({
         compiler: 'jsx',
         jsx: 'react',
@@ -78,8 +79,8 @@ export default defineConfig({
             svg.replace(/^<svg /, '<svg fill="currentColor" ')
           ),
         },
-      }),
-      tsconfigPaths(),
+      }) as PluginOption,
+      tsconfigPaths() as PluginOption,
     ],
   },
 
