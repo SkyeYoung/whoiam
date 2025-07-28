@@ -3,7 +3,7 @@ title: 维护开源软件的网站
 slug: the-website-for-open-source-software
 description: placeholder
 created_at: 2025-06-25T15:54:48.937Z
-updated_at: 2025-06-27T16:33:09.671Z
+updated_at: 2025-07-03T01:10:04.615Z
 draft: false
 tags:
   - opensource
@@ -153,9 +153,9 @@ Hugo 的好处是可以在不怎么修改网站框架的情况下，实现很多
 
 拆开后，所有的部分都可以单独维护。对依赖的升级，完全能分开进行。某天想拆到另一个仓库，也不是问题。
 
-这也是为什么本人认为其他框架没有内置 Docusaurus 中 Blog 特性，是一个缺点。博客本身就跟文档关系不大，而其他专门的 Blog 框架也大概率做的比 Docusaurus 的 Blog 要好得多。
+这也是为什么本人认为其他框架没有内置 Blog 特性不是一个缺点。博客本身就跟文档关系不大，其他专门的 Blog 框架也大概率做的比 Docusaurus 的要好得多。
 
-还有一个额外的好处是，文档部分的代码和内容完全分离，其他子项目可用 `git submodule` 等方式引 `apps/docs` 构建预览页面，非常方便。（APISIX Website 现存的处理方式做这件事相对困难，会构建太多不需要的东西。）
+还有一个好处是，文档部分的代码和内容完全分离，其他子项目可用 `git submodule` 等方式引 `apps/docs` 构建预览页面，非常方便。（APISIX Website 现存的处理方式做这件事相对困难，会构建太多不需要的东西。）
 
 ## 构建
 
